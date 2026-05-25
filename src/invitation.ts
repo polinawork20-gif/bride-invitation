@@ -1,5 +1,30 @@
 // @ts-nocheck
 
+const MOBILE_BREAKPOINT = 768;
+
+const isMobile = () => window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function scaleCount(count, reductionPercent, min = 1) {
+  if (!isMobile()) return count;
+  return Math.max(min, Math.round(count * (1 - reductionPercent / 100)));
+}
+
+function particleCount(desktop, mobileReduction, min = 1) {
+  if (prefersReducedMotion()) return min;
+  return scaleCount(desktop, mobileReduction, min);
+}
+
+function initPerformanceMode() {
+  const mobile = isMobile();
+  const reduced = prefersReducedMotion();
+  document.documentElement.classList.toggle('is-mobile', mobile);
+  document.documentElement.classList.toggle('perf-lite', mobile || reduced);
+  document.documentElement.classList.toggle('reduced-motion', reduced);
+}
+
+initPerformanceMode();
+
 const bgGlows = document.getElementById('bgGlows');
     const bgFlowers = document.getElementById('bgFlowers');
     const layerFar = document.getElementById('layerFar');
@@ -61,19 +86,24 @@ const bgGlows = document.getElementById('bgGlows');
     }
 
     function createGlowBlobs() {
+      const mobile = isMobile();
       const blobs = [
         { w: 480, h: 480, bg: 'radial-gradient(circle at 35% 35%, #ffe8d0, #ffd0a8 50%, transparent 72%)', blur: 105, op: 0.55, left: '2%', top: '12%', dx: '14px', dy: '-12px' },
         { w: 400, h: 400, bg: 'radial-gradient(circle at 60% 40%, #fce8ec, #f0b0c8 50%, transparent 70%)', blur: 95, op: 0.48, left: '74%', top: '5%', dx: '-20px', dy: '12px' },
         { w: 380, h: 380, bg: 'radial-gradient(circle at 40% 60%, #fff4e8, #f0b8c8 55%, transparent 72%)', blur: 88, op: 0.44, left: '3%', top: '70%', dx: '10px', dy: '10px' },
         { w: 360, h: 360, bg: 'radial-gradient(circle at 55% 45%, #f8c8d8, #e8a0b8 52%, transparent 68%)', blur: 82, op: 0.4, left: '76%', top: '65%', dx: '-16px', dy: '-12px' }
       ];
-      blobs.forEach((b, i) => {
+      const list = mobile ? blobs.slice(0, 2) : blobs;
+      list.forEach((b, i) => {
+        const w = mobile ? Math.round(b.w * 0.72) : b.w;
+        const h = mobile ? Math.round(b.h * 0.72) : b.h;
+        const blur = mobile ? Math.min(20, Math.round(b.blur * 0.45)) : b.blur;
         const el = document.createElement('div');
         el.className = 'glow-blob';
         el.style.cssText = `
-          width: ${b.w}px; height: ${b.h}px;
+          width: ${w}px; height: ${h}px;
           background: ${b.bg};
-          --blur: ${b.blur}px; --op: ${b.op};
+          --blur: ${blur}px; --op: ${mobile ? b.op * 0.85 : b.op};
           --dx: ${b.dx}; --dy: ${b.dy};
           --dur: ${18 + i * 3}s;
           --delay: ${-i * 4}s;
@@ -284,6 +314,13 @@ const bgGlows = document.getElementById('bgGlows');
     }
 
     function pickHeartTier() {
+      if (isMobile()) {
+        const roll = Math.random();
+        if (roll < 0.2) return { tier: 'medium', op: 0.15 + Math.random() * 0.1, blurChance: 0.22, visible: false };
+        if (roll < 0.45) return { tier: 'clear', op: 0.18 + Math.random() * 0.1, blurChance: 0.16, visible: false };
+        if (roll < 0.7) return { tier: 'soft', op: 0.14 + Math.random() * 0.08, blurChance: 0.35, visible: false };
+        return { tier: 'bold', op: 0.22 + Math.random() * 0.1, blurChance: 0.1, visible: false };
+      }
       const roll = Math.random();
       if (roll < 0.24) {
         return { tier: 'whisper', op: 0.04 + Math.random() * 0.06, blurChance: 0.62, visible: false };
@@ -526,14 +563,24 @@ const bgGlows = document.getElementById('bgGlows');
     function buildAtmosphere() {
       createGlowBlobs();
       createBlossomClusters();
-      createBokeh(layerFar, 22);
-      createSparkles(layerFar, 38);
-      createHearts(layerFar, 530, false);
-      createLargeSoftHearts(layerFar, 70);
-      createUltraSoftHearts(layerFar, 3);
-      createSparkles(layerNear, 22);
-      createHearts(layerNear, 270, true);
-      createLargeSoftHearts(layerNear, 35);
+      createBokeh(layerFar, particleCount(22, 50, 6));
+      createSparkles(layerFar, particleCount(38, 70, 8));
+      createHearts(layerFar, particleCount(530, 60, 80), false);
+      createLargeSoftHearts(layerFar, particleCount(70, 55, 2));
+      createUltraSoftHearts(layerFar, prefersReducedMotion() ? 0 : (isMobile() ? 2 : 3));
+      createSparkles(layerNear, particleCount(22, 70, 4));
+      createHearts(layerNear, particleCount(270, 60, 40), true);
+      createLargeSoftHearts(layerNear, particleCount(35, 55, 1));
+    }
+
+    function getSpringCounts() {
+      if (prefersReducedMotion()) {
+        return { bloom: 8, heart: 6, shimmer: 6, petal: 2, extraSparkles: 6, fillMax: 3 };
+      }
+      if (isMobile()) {
+        return { bloom: 22, heart: 18, shimmer: 22, petal: 6, extraSparkles: 18, fillMax: 8 };
+      }
+      return { bloom: 72, heart: 58, shimmer: 85, petal: 20, extraSparkles: 75, fillMax: 24 };
     }
 
     const springBloomLayer = document.getElementById('springBloomLayer');
@@ -614,7 +661,8 @@ const bgGlows = document.getElementById('bgGlows');
 
     function addExtraSparkles() {
       const colors = ['rgba(255,255,255,0.95)', 'rgba(255,248,242,0.9)', 'rgba(253,230,233,0.85)'];
-      for (let i = 0; i < 75; i++) {
+      const total = getSpringCounts().extraSparkles;
+      for (let i = 0; i < total; i++) {
         const size = 2 + Math.random() * 6;
         const el = document.createElement('div');
         el.className = 'sparkle-dot spring-extra';
@@ -631,18 +679,21 @@ const bgGlows = document.getElementById('bgGlows');
     }
 
     function spawnSpringBloom() {
+      const c = getSpringCounts();
       springBloomLayer.innerHTML = '';
-      for (let i = 0; i < 72; i++) addSpringBloom();
-      for (let i = 0; i < 58; i++) addSpringHeart();
-      for (let i = 0; i < 85; i++) addSpringShimmer();
-      for (let i = 0; i < 20; i++) addSpringPetal();
+      for (let i = 0; i < c.bloom; i++) addSpringBloom();
+      for (let i = 0; i < c.heart; i++) addSpringHeart();
+      for (let i = 0; i < c.shimmer; i++) addSpringShimmer();
+      for (let i = 0; i < c.petal; i++) addSpringPetal();
     }
 
     function startSpringGentleFill() {
       stopSpringGentleFill();
       let n = 0;
+      const fillMax = getSpringCounts().fillMax;
+      const fillInterval = isMobile() ? 1600 : 1100;
       springFillTimer = setInterval(() => {
-        if (!document.body.classList.contains('letter-reading') || n >= 24) {
+        if (!document.body.classList.contains('letter-reading') || n >= fillMax) {
           stopSpringGentleFill();
           return;
         }
@@ -650,7 +701,7 @@ const bgGlows = document.getElementById('bgGlows');
         if (n % 2 === 0) addSpringBloom();
         if (n % 5 === 0) addSpringShimmer();
         n += 1;
-      }, 1100);
+      }, fillInterval);
     }
 
     function stopSpringGentleFill() {

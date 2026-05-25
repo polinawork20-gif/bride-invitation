@@ -1383,3 +1383,214 @@
     .close-btn:hover {
       background: rgba(255, 255, 255, 0.75);
     }
+
+    /* ——— Mobile performance (≤768px) ——— */
+    @media (max-width: 768px) {
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      .scene {
+        width: 100%;
+        max-width: 100vw;
+        padding: 0 0.25rem;
+        gap: 1.25rem;
+      }
+
+      .hint {
+        font-size: 1.05rem;
+        text-align: center;
+        padding: 0 0.5rem;
+      }
+
+      .envelope-wrapper {
+        --env-w: min(540px, 92vw);
+        max-width: 92vw;
+        animation-duration: 7.5s;
+        filter: drop-shadow(0 14px 28px rgba(234, 166, 183, 0.22));
+      }
+
+      .envelope-wrapper:hover:not(.open) {
+        filter: drop-shadow(0 16px 32px rgba(234, 166, 183, 0.24));
+      }
+
+      .envelope-halo {
+        width: min(92vw, 520px);
+        height: min(68vw, 420px);
+        filter: blur(20px);
+        animation-duration: 10s;
+      }
+
+      .glow-blob {
+        filter: blur(min(var(--blur), 20px));
+        animation-duration: 22s;
+      }
+
+      .bg-base-glows {
+        animation: none;
+        opacity: 0.9;
+      }
+
+      .blossom-cluster {
+        filter: blur(min(var(--blur), 8px));
+        animation-duration: 14s;
+      }
+
+      .bokeh {
+        filter: blur(min(var(--blur), 14px));
+        animation-duration: 16s;
+      }
+
+      .heart-shape {
+        will-change: auto;
+      }
+
+      .heart-shape.blurred {
+        filter: blur(6px);
+      }
+
+      .heart-shape.soft-blur,
+      .heart-shape.whisper {
+        filter: blur(8px);
+      }
+
+      .heart-shape.visible-bold {
+        filter: drop-shadow(0 0 4px rgba(244, 184, 198, 0.18));
+      }
+
+      .heart-giant {
+        filter: blur(10px);
+      }
+
+      .heart-giant-xl {
+        filter: blur(12px);
+      }
+
+      .heart-giant-ultra {
+        filter: blur(14px);
+      }
+
+      .heart-giant svg,
+      .heart-giant-xl svg,
+      .heart-giant-ultra svg {
+        filter: none;
+      }
+
+      .petal-drift.blurred svg,
+      .spring-petal.blurred svg {
+        filter: none;
+      }
+
+      .sparkle-dot {
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+        animation-duration: 5s;
+      }
+
+      .env-float-heart,
+      .env-sparkle,
+      .env-blossom-mini,
+      .env-pearl {
+        animation-duration: 9s;
+      }
+
+      .glow {
+        width: min(92vw, 380px);
+        height: min(92vw, 380px);
+      }
+
+      .close-btn {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: 0 3px 12px rgba(160, 100, 120, 0.14);
+        font-size: 0.72rem;
+        padding: 0.55rem 1.2rem;
+        min-height: 44px;
+      }
+
+      body.letter-reading .spring-light-veil {
+        animation: none;
+        opacity: 0.85;
+      }
+
+      body.letter-reading .bg-flowers .blossom-cluster {
+        filter: blur(min(var(--blur), 10px)) saturate(1.15) brightness(1.04) !important;
+        transform: scale(1.35) !important;
+        transition: transform 2.5s ease, opacity 2.5s ease;
+      }
+
+      body.letter-reading .heart-shape {
+        filter: blur(4px) !important;
+        transition: opacity 2s ease;
+      }
+
+      body.letter-reading .sparkle-dot {
+        transition: opacity 2s ease, transform 2s ease;
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.55);
+        transform: scale(1.15);
+      }
+
+      body.letter-reading .bokeh {
+        transition: opacity 2s ease, transform 2s ease;
+        filter: blur(min(var(--blur), 14px)) !important;
+        transform: scale(1.12);
+      }
+
+      body.letter-reading .envelope-halo {
+        filter: blur(20px);
+        animation-duration: 12s;
+      }
+
+      .envelope-wrapper.open .letter {
+        width: min(500px, 92vw);
+      }
+
+      .envelope-wrapper.open .letter-body {
+        padding: 4.25rem 1.65rem 4rem;
+      }
+    }
+
+    /* ——— Reduced motion ——— */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .envelope-wrapper,
+      .glow-blob,
+      .bokeh,
+      .sparkle-dot,
+      .heart-shape,
+      .blossom-cluster,
+      .envelope-halo,
+      .env-float-heart,
+      .env-sparkle,
+      .env-pearl,
+      .petal-drift,
+      .spring-petal,
+      .spring-item,
+      .spring-shimmer,
+      .bg-base-glows {
+        animation: none !important;
+      }
+
+      .envelope-wrapper:hover:not(.open) {
+        transform: none;
+      }
+
+      body.letter-reading .spring-light-veil,
+      body.letter-reading .envelope-halo {
+        animation: none !important;
+      }
+
+      .heart-shape,
+      .glow-blob,
+      .bokeh {
+        will-change: auto;
+      }
+    }
