@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для тебя ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Marck+Script&family=Pinyon+Script&display=swap" rel="stylesheet">
+  </head>
+<body>
+<div class="atmosphere" aria-hidden="true">
+    <div class="bg-base"></div>
+    <div class="bg-base-glows"></div>
+    <div class="bg-champagne-patch" aria-hidden="true"></div>
+    <div class="bg-vignette"></div>
+    <div class="bg-glows" id="bgGlows"></div>
+    <div class="bg-flowers" id="bgFlowers"></div>
+    <div class="spring-light-veil" aria-hidden="true"></div>
+    <div class="spring-bloom-layer" id="springBloomLayer" aria-hidden="true"></div>
+    <div class="layer-far" id="layerFar"></div>
+  </div>
+  <div class="envelope-halo" aria-hidden="true"></div>
+  <div class="glow" id="glow"></div>
+
+  <div class="layer-near" id="layerNear" aria-hidden="true"></div>
+
+  <div class="scene">
+    <p class="hint" id="hint">нажми на конверт ♡</p>
+
+    <div class="envelope-wrapper" id="envelope">
+      <div class="envelope">
+        <svg class="env-svg" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="flapShade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f5c0d4"/>
+              <stop offset="100%" stop-color="#eab0c4"/>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="220" rx="3" fill="#fde8f2"/>
+          <polygon points="0,220 340,220 170,118" fill="#fad8e8"/>
+          <line x1="0" y1="220" x2="170" y2="118" stroke="#f0b8cc" stroke-width="0.7" opacity="0.4"/>
+          <line x1="340" y1="220" x2="170" y2="118" stroke="#f0b8cc" stroke-width="0.7" opacity="0.4"/>
+          <g class="flap-group">
+            <polygon points="0,0 340,0 170,118" fill="url(#flapShade)"/>
+            <line x1="15" y1="118" x2="325" y2="118" stroke="#e0a8b8" stroke-width="0.8" opacity="0.25"/>
+          </g>
+        </svg>
+        <div class="envelope-ornaments" aria-hidden="true">
+          <div class="env-glow-soft" aria-hidden="true"></div>
+          <span class="env-float-heart env-float-heart--1">♡</span>
+          <span class="env-float-heart env-float-heart--2">♡</span>
+          <span class="env-float-heart env-float-heart--3">♡</span>
+          <span class="env-float-heart env-float-heart--4">♡</span>
+          <span class="env-sparkle env-sparkle--1" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--2" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--3" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--4" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--5" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--6" aria-hidden="true"></span>
+          <div class="env-blossom-mini env-blossom-mini--bl" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="env-blossom-mini env-blossom-mini--br" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+          <span class="env-deco-motif env-deco-motif--l">❧</span>
+          <span class="env-deco-motif env-deco-motif--r">❧</span>
+          <span class="env-pearl env-pearl--1" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--2" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--3" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--4" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--5" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--6" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--7" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--8" aria-hidden="true"></span>
+          <span class="env-float-heart env-float-heart--5">♡</span>
+          <span class="env-float-heart env-float-heart--6">♡</span>
+          <span class="env-float-heart env-float-heart--7">♡</span>
+          <span class="env-float-heart env-float-heart--8">♡</span>
+          <div class="env-blossom-mini env-blossom-mini--tl" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="env-blossom-mini env-blossom-mini--tr" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+        </div>
+        <div class="env-inscription" aria-hidden="true">
+          <div class="env-inscription-flap">
+            <span class="env-inscription-heart">♡</span>
+            <p class="env-inscription-pretitle">приглашение только для тебя</p>
+            <h2 class="env-inscription-title">
+              <span>секретная</span>
+              <span>миссия</span>
+            </h2>
+          </div>
+          <div class="env-inscription-lower-wrap">
+            <div class="env-inscription-divider env-inscription-divider--lower" aria-hidden="true">
+              <span class="env-inscription-divider-line"></span>
+              <span class="env-inscription-divider-ornament">❧</span>
+              <span class="env-inscription-divider-line"></span>
+            </div>
+            <p class="env-inscription-lower">для невесты</p>
+          </div>
+        </div>
+        <div class="letter">
+          <div class="letter-lines" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="letter-ornaments" aria-hidden="true">
+            <div class="letter-flourish-corner letter-flourish-corner--tl">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-corner letter-flourish-corner--tr">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-corner letter-flourish-corner--bl">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-corner letter-flourish-corner--br">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--top">
+              <svg viewBox="0 0 300 52" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 0 26 C 25 8, 50 44, 75 26 C 100 8, 125 44, 150 26 C 175 8, 200 44, 225 26 C 250 8, 275 44, 300 26"/>
+                <path class="side-wave side-wave--soft" d="M 0 30 C 25 18, 50 38, 75 30 C 100 18, 125 38, 150 30 C 175 18, 200 38, 225 30 C 250 18, 275 38, 300 30"/>
+                <path class="side-curl" d="M 73 20 C 77 16, 81 24, 77 28 C 73 30, 69 24, 73 20"/>
+                <path class="side-curl" d="M 148 22 C 152 18, 156 26, 152 30 C 148 32, 144 26, 148 22"/>
+                <path class="side-curl" d="M 223 20 C 227 16, 231 24, 227 28 C 223 30, 219 24, 223 20"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--bottom">
+              <svg viewBox="0 0 300 52" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 0 26 C 25 44, 50 8, 75 26 C 100 44, 125 8, 150 26 C 175 44, 200 8, 225 26 C 250 44, 275 8, 300 26"/>
+                <path class="side-wave side-wave--soft" d="M 0 22 C 25 34, 50 14, 75 22 C 100 34, 125 14, 150 22 C 175 34, 200 14, 225 22 C 250 34, 275 14, 300 22"/>
+                <path class="side-curl" d="M 75 30 C 79 34, 83 26, 79 22 C 75 20, 71 26, 75 30"/>
+                <path class="side-curl" d="M 150 32 C 154 36, 158 28, 154 24 C 150 22, 146 28, 150 32"/>
+                <path class="side-curl" d="M 225 30 C 229 34, 233 26, 229 22 C 225 20, 221 26, 225 30"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--left">
+              <svg viewBox="0 0 52 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 26 0 C 8 25, 44 50, 26 75 C 8 100, 44 125, 26 150 C 8 175, 44 200, 26 225 C 8 250, 44 275, 26 300"/>
+                <path class="side-wave side-wave--soft" d="M 30 0 C 18 25, 38 50, 30 75 C 18 100, 38 125, 30 150 C 18 175, 38 200, 30 225 C 18 250, 38 275, 30 300"/>
+                <path class="side-curl" d="M 20 73 C 16 77, 24 81, 28 77 C 30 73, 24 69, 20 73"/>
+                <path class="side-curl" d="M 22 148 C 18 152, 26 156, 30 152 C 32 148, 26 144, 22 148"/>
+                <path class="side-curl" d="M 20 223 C 16 227, 24 231, 28 227 C 30 223, 24 219, 20 223"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--right">
+              <svg viewBox="0 0 52 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 26 0 C 44 25, 8 50, 26 75 C 44 100, 8 125, 26 150 C 44 175, 8 200, 26 225 C 44 250, 8 275, 26 300"/>
+                <path class="side-wave side-wave--soft" d="M 22 0 C 34 25, 14 50, 22 75 C 34 100, 14 125, 22 150 C 34 175, 14 200, 22 225 C 34 250, 14 275, 22 300"/>
+                <path class="side-curl" d="M 32 75 C 36 79, 28 83, 24 79 C 22 75, 28 71, 32 75"/>
+                <path class="side-curl" d="M 30 150 C 34 154, 26 158, 22 154 C 20 150, 26 146, 30 150"/>
+                <path class="side-curl" d="M 32 225 C 36 229, 28 233, 24 229 C 22 225, 28 221, 32 225"/>
+              </svg>
+            </div>
+            <span class="letter-motif letter-motif--top">❧</span>
+            <span class="letter-motif letter-motif--bottom">❧</span>
+          </div>
+          <div class="letter-body">
+            <header class="letter-block letter-header">
+              <h1 class="letter-script-title">Приглашение</h1>
+              <svg class="letter-title-ornament" viewBox="0 0 140 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 4 12 C 20 6, 45 4, 70 12 C 95 20, 120 18, 136 12"/>
+                <path d="M 70 12 C 68 8, 72 16, 70 12" opacity="0.6"/>
+                <path d="M 25 10 C 30 8, 35 14, 40 11 M 100 13 C 105 16, 110 9, 115 12" opacity="0.55"/>
+              </svg>
+              <p class="letter-tagline"><span class="letter-tagline-flourish">✦</span> на девичник <span class="letter-tagline-flourish">✦</span></p>
+              <p class="letter-hero">Катя, у нас есть план на тебя</p>
+            </header>
+
+            <div class="letter-block letter-content">
+              <dl class="letter-details">
+                <div class="letter-detail">
+                  <dt>Важная деталь</dt>
+                  <dd>30 мая, утро — просыпайся не позже 11:00<br>и узнаешь, что тебя ждёт</dd>
+                </div>
+                <div class="letter-detail">
+                  <dt>Дресс-код</dt>
+                  <dd>надевай то, что душе хочется</dd>
+                </div>
+                <div class="letter-detail">
+                  <dt>Полная конфиденциальность</dt>
+                  <dd>детали дня строго под секретом</dd>
+                </div>
+              </dl>
+
+              <div class="letter-closing" aria-hidden="true">
+                <span class="letter-closing-line"></span>
+                <span class="letter-closing-ornament">♡ · ❧ · ♡</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="seal-wrap">
+          <div class="seal">
+            <svg class="seal-heart" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="sealHeartGrad" cx="32%" cy="28%" r="70%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#ffe0ec"/>
+                  <stop offset="100%" stop-color="#e07898"/>
+                </radialGradient>
+              </defs>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#sealHeartGrad)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="envelope-shadow"></div>
+    </div>
+
+    <button class="close-btn" id="closeBtn">закрыть конверт</button>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

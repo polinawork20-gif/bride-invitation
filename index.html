@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для тебя ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Marck+Script&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #fffaf5;
+      --champagne: #f8f0e6;
+      --champagne-light: #fff8f0;
+      --blush: #fde6e9;
+      --rose-soft: #f8cfd8;
+      --rose: #f4b8c6;
+      --rose-deep: #eaa6b7;
+      --env-body: #fdf0f4;
+      --env-fold: #f8d4e0;
+      --env-flap-top: #f0b8c8;
+      --env-flap-bot: #eaa6b7;
+      --text: #b87890;
+      --text-soft: #d4a0b0;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fffaf5;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    /* ——— ATMOSPHERE ——— */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-base {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 95% 75% at 4% 8%, #ffd8c8 0%, transparent 48%),
+        radial-gradient(ellipse 70% 55% at 92% 15%, #f8b8c8 0%, transparent 45%),
+        radial-gradient(ellipse 85% 50% at 50% 105%, #e8a8b8 0%, transparent 50%),
+        radial-gradient(ellipse 55% 45% at 72% 78%, #f4b0c0 0%, transparent 42%),
+        linear-gradient(
+          128deg,
+          #fff8f4 0%,
+          #ffe8d8 18%,
+          #fdd8d8 32%,
+          #f8c8d8 44%,
+          #f0b8c8 58%,
+          #eab8c4 70%,
+          #f5d0dc 82%,
+          #fff0f4 94%,
+          #fffcfa 100%
+        );
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+      animation: bgBaseShift 22s ease-in-out infinite;
+    }
+
+    /* шампань — одно мягкое пятно слева сверху, не радиальный по всему экрану */
+    .bg-champagne-patch {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: min(52vw, 520px);
+      height: min(42vh, 380px);
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        148deg,
+        rgba(255, 252, 248, 0.95) 0%,
+        rgba(248, 240, 232, 0.82) 28%,
+        rgba(245, 235, 225, 0.45) 55%,
+        transparent 78%
+      );
+      -webkit-mask-image: linear-gradient(135deg, #000 0%, #000 42%, transparent 88%);
+      mask-image: linear-gradient(135deg, #000 0%, #000 42%, transparent 88%);
+      animation: champagneFade 16s ease-in-out infinite;
+    }
+
+    @keyframes champagneFade {
+      0%, 100% { opacity: 0.88; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes bgBaseShift {
+      0%, 100% { filter: brightness(1) saturate(1); }
+      50% { filter: brightness(1.04) saturate(1.08); }
+    }
+
+    .bg-base-glows {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      animation: backgroundBreath 14s ease-in-out infinite;
+    }
+
+    .bg-base-glows::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 72% at 6% 10%, rgba(255, 195, 155, 0.88) 0%, rgba(255, 218, 185, 0.42) 28%, transparent 54%),
+        radial-gradient(ellipse 65% 58% at 22% 28%, rgba(255, 240, 228, 0.8) 0%, transparent 52%),
+        radial-gradient(ellipse 55% 50% at 38% 8%, rgba(255, 228, 210, 0.6) 0%, transparent 48%),
+        radial-gradient(ellipse 68% 60% at 90% 18%, rgba(248, 180, 200, 0.78) 0%, rgba(245, 225, 218, 0.38) 35%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 95% 45%, rgba(235, 175, 195, 0.48) 0%, transparent 50%),
+        radial-gradient(ellipse 95% 48% at 48% 100%, rgba(235, 168, 190, 0.72) 0%, transparent 58%),
+        radial-gradient(ellipse 52% 42% at 12% 85%, rgba(255, 210, 185, 0.48) 0%, transparent 50%),
+        radial-gradient(ellipse 48% 38% at 80% 70%, rgba(244, 158, 180, 0.48) 0%, transparent 48%);
+    }
+
+    .bg-base-glows::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.88;
+      background:
+        linear-gradient(48deg, rgba(255, 218, 185, 0.4) 0%, transparent 38%),
+        linear-gradient(228deg, rgba(255, 180, 200, 0.3) 0%, transparent 42%),
+        linear-gradient(168deg, transparent 55%, rgba(240, 152, 175, 0.26) 100%);
+      mix-blend-mode: soft-light;
+      animation: bgGlowShift 18s ease-in-out infinite;
+    }
+
+    @keyframes bgGlowShift {
+      0%, 100% { opacity: 0.82; transform: translate(0, 0); }
+      50% { opacity: 0.95; transform: translate(1%, -0.5%); }
+    }
+
+    .bg-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        radial-gradient(ellipse 75% 70% at 50% 45%, transparent 42%, rgba(235, 140, 165, 0.14) 100%),
+        radial-gradient(ellipse 100% 90% at 50% 50%, transparent 30%, rgba(220, 130, 155, 0.1) 100%);
+    }
+
+    .bg-glows {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+    }
+
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(var(--blur));
+      opacity: var(--op);
+      animation: glowDrift var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes glowDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(var(--dx), var(--dy)) scale(1.06); }
+    }
+
+    @keyframes backgroundBreath {
+      0%, 100% { opacity: 0.92; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); }
+    }
+
+    .bg-flowers {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+    }
+
+    .blossom-cluster {
+      position: absolute;
+      opacity: var(--op);
+      filter: blur(var(--blur));
+      animation: clusterBreath 10s ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    .blossom-cluster svg {
+      display: block;
+    }
+
+    @keyframes clusterBreath {
+      0%, 100% { opacity: var(--op); transform: scale(1); }
+      50% { opacity: calc(var(--op) * 1.04); transform: scale(1.015); }
+    }
+
+    .spring-light-veil {
+      position: fixed;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 2.4s ease;
+      background:
+        radial-gradient(ellipse 75% 55% at 50% 42%, rgba(255, 252, 254, 0.42) 0%, transparent 58%),
+        radial-gradient(ellipse 55% 45% at 22% 68%, rgba(255, 228, 238, 0.28) 0%, transparent 52%),
+        radial-gradient(ellipse 50% 40% at 78% 32%, rgba(255, 238, 248, 0.24) 0%, transparent 48%);
+    }
+
+    body.letter-reading .spring-light-veil {
+      opacity: 1;
+      animation: springVeilGlow 9s ease-in-out infinite;
+    }
+
+    @keyframes springVeilGlow {
+      0%, 100% { filter: brightness(1) saturate(1); }
+      50% { filter: brightness(1.1) saturate(1.12); }
+    }
+
+    .spring-bloom-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 2.2s ease;
+    }
+
+    body.letter-reading .spring-bloom-layer {
+      opacity: 1;
+    }
+
+    .spring-item {
+      position: absolute;
+      opacity: 0;
+      animation: springItemIn 3.2s ease forwards;
+    }
+
+    .spring-item--heart svg,
+    .spring-item--bloom svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .spring-item--heart svg {
+      filter: drop-shadow(0 0 10px rgba(255, 215, 228, 0.35));
+    }
+
+    .spring-shimmer {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 232, 242, 0.45) 35%, transparent 72%);
+      animation: springShimmer 4s ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes springItemIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: var(--op); transform: scale(1); }
+    }
+
+    @keyframes springShimmer {
+      0%, 100% { opacity: 0.15; transform: scale(0.75); }
+      50% { opacity: 0.75; transform: scale(1.15); }
+    }
+
+    .spring-petal,
+    .petal-drift {
+      position: absolute;
+      background: none;
+      border-radius: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    .spring-petal svg,
+    .petal-drift svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 1px 2px rgba(200, 120, 140, 0.15));
+    }
+
+    .spring-petal,
+    .petal-drift {
+      animation:
+        petalFallMove var(--dur) linear infinite,
+        petalFallFade var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay), var(--delay);
+    }
+
+    .petal-drift.blurred svg,
+    .spring-petal.blurred svg {
+      filter: blur(0.8px) drop-shadow(0 1px 2px rgba(200, 120, 140, 0.12));
+    }
+
+    @keyframes petalFallMove {
+      0% { transform: translate3d(0, -6vh, 0) rotate(var(--rot)); }
+      100% { transform: translate3d(var(--dx), var(--fall), 0) rotate(calc(var(--rot) + var(--spin))); }
+    }
+
+    @keyframes petalFallFade {
+      0%, 100% { opacity: 0; }
+      12%, 88% { opacity: var(--op); }
+    }
+
+    body.letter-reading .layer-far .petal-drift,
+    body.letter-reading .layer-near .petal-drift {
+      visibility: hidden;
+      animation-play-state: paused !important;
+    }
+
+    body.letter-reading .bg-flowers .blossom-cluster {
+      opacity: calc(var(--op) * 2.2) !important;
+      filter: blur(calc(var(--blur) * 0.5)) saturate(1.32) brightness(1.08) !important;
+      transform: scale(1.65) !important;
+      transition: transform 3s ease, opacity 3s ease, filter 3s ease;
+    }
+
+    body.letter-reading .heart-shape {
+      transition: filter 2.8s ease;
+      filter: blur(2px) drop-shadow(0 0 14px rgba(255, 210, 225, 0.28)) !important;
+    }
+
+    body.letter-reading .sparkle-dot {
+      transition: opacity 2.5s ease, transform 2.5s ease, box-shadow 2.5s ease;
+      opacity: 0.55 !important;
+      transform: scale(1.35);
+      box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.75),
+        0 0 16px rgba(255, 200, 218, 0.45);
+    }
+
+    body.letter-reading .bokeh {
+      transition: opacity 2.5s ease, transform 2.5s ease, filter 2.5s ease;
+      opacity: calc(var(--op-max, 0.3) * 1.8) !important;
+      transform: scale(1.3);
+      filter: blur(var(--blur)) brightness(1.15);
+    }
+
+    body.letter-reading .envelope-halo {
+      animation: springHalo 8s ease-in-out infinite;
+      opacity: 0.95;
+      transform: translate(-50%, -50%) scale(1.28);
+      transition: transform 2.5s ease, opacity 2.5s ease;
+      background: radial-gradient(ellipse, rgba(255, 254, 250, 0.96) 0%, rgba(252, 228, 218, 0.62) 38%, rgba(252, 205, 220, 0.48) 55%, transparent 74%);
+    }
+
+    @keyframes springHalo {
+      0%, 100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.26); }
+      50% { opacity: 1; transform: translate(-50%, -51%) scale(1.34); }
+    }
+
+    .layer-far,
+    .layer-near {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .layer-far { z-index: 5; }
+    .layer-near {
+      z-index: 11;
+      pointer-events: none;
+    }
+
+    .envelope-halo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 860px;
+      height: 620px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse, rgba(255, 252, 246, 0.94) 0%, rgba(248, 228, 218, 0.55) 38%, rgba(248, 200, 215, 0.4) 55%, transparent 72%);
+      filter: blur(48px);
+      z-index: 7;
+      pointer-events: none;
+      animation: haloBreath 7s ease-in-out infinite;
+    }
+
+    @keyframes haloBreath {
+      0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -52%) scale(1.06); }
+    }
+
+    .bokeh {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--bokeh-color);
+      filter: blur(var(--blur));
+      animation: bokehPulse var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes bokehPulse {
+      0%, 100% { opacity: var(--op-min); transform: scale(1); }
+      50% { opacity: var(--op-max); transform: scale(1.12); }
+    }
+
+    .sparkle-dot {
+      position: absolute;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: var(--sparkle-color);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+      animation: twinkle var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(0.8); }
+      50% { opacity: 0.75; transform: scale(1.15); }
+    }
+
+    .heart-shape {
+      position: absolute;
+      width: var(--size);
+      height: var(--size);
+      opacity: 0;
+      animation: floatUpHeart var(--dur) ease-in-out infinite;
+      animation-delay: var(--delay);
+      will-change: transform, opacity;
+    }
+
+    .heart-shape.blurred {
+      filter: blur(2.5px);
+    }
+
+    .heart-shape.soft-blur {
+      filter: blur(4px);
+    }
+
+    .heart-shape.visible,
+    .heart-shape.visible-medium {
+      filter: none;
+    }
+
+    .heart-shape.visible-bold {
+      filter: drop-shadow(0 0 6px rgba(244, 184, 198, 0.25));
+    }
+
+    .heart-shape.visible.blurred,
+    .heart-shape.visible-medium.blurred {
+      filter: blur(1.5px);
+    }
+
+    .heart-shape.whisper {
+      filter: blur(5px);
+    }
+
+    .heart-giant {
+      filter: blur(8px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart-giant svg {
+      filter: blur(1px);
+    }
+
+    .heart-giant-xl {
+      filter: blur(11px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart-giant-xl svg {
+      filter: blur(1.5px);
+    }
+
+    .heart-giant-ultra {
+      filter: blur(16px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart-giant-ultra svg {
+      filter: blur(2px);
+    }
+
+    .heart-shape.mist {
+      filter: blur(3px);
+    }
+
+    .heart-shape svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    @keyframes floatUpHeart {
+      0% {
+        opacity: 0;
+        transform: translate(0, 10px) rotate(var(--rot)) scale(var(--scale-start));
+      }
+      12% { opacity: var(--op); }
+      88% { opacity: var(--op); }
+      100% {
+        opacity: 0;
+        transform: translate(var(--drift), -125vh) rotate(calc(var(--rot) + var(--rot-end))) scale(var(--scale-end));
+      }
+    }
+
+    .petal-drift {
+      width: var(--w);
+      height: var(--h);
+    }
+
+    /* сцена */
+    .scene {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hint {
+      font-family: 'Marck Script', cursive;
+      font-size: 1.25rem;
+      color: rgba(184, 120, 144, 0.55);
+      opacity: 0.65;
+      letter-spacing: 0.03em;
+      transition: opacity 0.6s ease;
+      text-shadow: none;
+    }
+
+    .hint.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* конверт */
+    .envelope-wrapper {
+      --env-w: min(540px, 92vw);
+      --env-h: calc(var(--env-w) * 220 / 340);
+      perspective: 1200px;
+      cursor: pointer;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: drop-shadow(0 20px 40px rgba(234, 166, 183, 0.28)) drop-shadow(0 8px 20px rgba(248, 207, 216, 0.2));
+      animation: envelopeFloat 5.5s ease-in-out infinite;
+    }
+
+    @keyframes envelopeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .envelope-wrapper:hover:not(.open) {
+      animation: none;
+      transform: scale(1.02) translateY(-6px);
+      filter: drop-shadow(0 24px 48px rgba(234, 166, 183, 0.32)) drop-shadow(0 10px 24px rgba(248, 207, 216, 0.22));
+    }
+
+    .envelope-wrapper.open {
+      cursor: default;
+      animation: none;
+    }
+
+    .envelope {
+      position: relative;
+      width: var(--env-w);
+      height: var(--env-h);
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .envelope-wrapper.open .envelope {
+      overflow: visible;
+    }
+
+    .envelope-shadow {
+      position: absolute;
+      bottom: -44px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92%;
+      height: 58px;
+      background: radial-gradient(ellipse, rgba(234, 166, 183, 0.32) 0%, rgba(248, 207, 216, 0.1) 55%, transparent 75%);
+      border-radius: 50%;
+      transition: opacity 0.6s ease;
+    }
+
+    .envelope-wrapper.open .envelope-shadow {
+      opacity: 0.4;
+    }
+
+    .env-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .env-svg .flap-group {
+      transform-origin: 50% 0;
+      transform-box: fill-box;
+      transform-style: preserve-3d;
+      transition: transform 1s cubic-bezier(0.34, 1.1, 0.64, 1);
+    }
+
+    .envelope-wrapper.open .env-svg .flap-group {
+      transform: rotateX(-175deg);
+    }
+
+    .envelope-ornaments {
+      position: absolute;
+      inset: -3%;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.55s ease;
+      overflow: visible;
+    }
+
+    .envelope-wrapper.open .envelope-ornaments {
+      opacity: 0;
+    }
+
+    .env-glow-soft {
+      position: absolute;
+      inset: 8% 4% 2% 4%;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 65%, rgba(255, 245, 248, 0.55) 0%, transparent 68%),
+        radial-gradient(ellipse 40% 30% at 20% 80%, rgba(255, 228, 238, 0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(255, 228, 238, 0.25) 0%, transparent 70%);
+      border-radius: 2px;
+    }
+
+    .env-float-heart {
+      position: absolute;
+      font-family: 'Great Vibes', cursive;
+      line-height: 1;
+      color: rgba(190, 110, 130, 0.28);
+      user-select: none;
+      animation: envHeartFloat 7s ease-in-out infinite;
+    }
+
+    .env-float-heart--1 { top: 58%; left: -2%; font-size: 1.35rem; animation-delay: 0s; }
+    .env-float-heart--2 { top: 48%; right: -1%; font-size: 1.1rem; animation-delay: -2s; }
+    .env-float-heart--3 { bottom: 18%; left: 6%; font-size: 0.95rem; animation-delay: -4s; }
+    .env-float-heart--4 { bottom: 20%; right: 7%; font-size: 1rem; animation-delay: -1.5s; }
+
+    @keyframes envHeartFloat {
+      0%, 100% { opacity: 0.2; transform: translateY(0) scale(1); }
+      50% { opacity: 0.42; transform: translateY(-4px) scale(1.08); }
+    }
+
+    .env-blossom-mini {
+      position: absolute;
+      width: 2.1rem;
+      height: 2.1rem;
+      opacity: 0.42;
+      animation: envBlossomPulse 7s ease-in-out infinite;
+    }
+
+    @keyframes envBlossomPulse {
+      0%, 100% { opacity: 0.34; }
+      50% { opacity: 0.52; }
+    }
+
+    .env-blossom-mini svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .env-blossom-mini--bl { bottom: 10%; left: 10%; transform: rotate(-18deg); }
+    .env-blossom-mini--br { bottom: 10%; right: 10%; transform: scaleX(-1) rotate(-18deg); }
+
+    .env-sparkle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 5px rgba(255, 210, 225, 0.55);
+      animation: envSparkle 4s ease-in-out infinite;
+    }
+
+    .env-sparkle--1 { top: 54%; left: 18%; animation-delay: 0s; }
+    .env-sparkle--2 { top: 62%; right: 20%; animation-delay: -1.2s; }
+    .env-sparkle--3 { bottom: 28%; left: 22%; animation-delay: -2.4s; width: 2px; height: 2px; }
+    .env-sparkle--4 { bottom: 32%; right: 24%; animation-delay: -0.8s; width: 2px; height: 2px; }
+    .env-sparkle--5 { top: 72%; left: 42%; animation-delay: -1.8s; }
+    .env-sparkle--6 { top: 68%; right: 40%; animation-delay: -3s; }
+
+    @keyframes envSparkle {
+      0%, 100% { opacity: 0.15; transform: scale(0.7); }
+      50% { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    .env-deco-motif {
+      position: absolute;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.15rem;
+      color: rgba(176, 118, 138, 0.38);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .env-deco-motif--l { bottom: 22%; left: 8%; transform: rotate(-12deg); }
+    .env-deco-motif--r { bottom: 22%; right: 8%; transform: rotate(12deg) scaleX(-1); }
+
+    .env-pearl {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff 0%, #ffe8f0 45%, #e8b8c8 100%);
+      box-shadow: 0 0 6px rgba(255, 220, 235, 0.5);
+      animation: envPearlTwinkle 4.5s ease-in-out infinite;
+    }
+
+    .env-pearl--1 { bottom: 11%; left: 14%; animation-delay: 0s; }
+    .env-pearl--2 { bottom: 11%; left: 22%; animation-delay: -0.6s; }
+    .env-pearl--3 { bottom: 11%; right: 22%; animation-delay: -1.2s; }
+    .env-pearl--4 { bottom: 11%; right: 14%; animation-delay: -1.8s; }
+    .env-pearl--5 { top: 56%; left: 10%; width: 4px; height: 4px; animation-delay: -2.2s; }
+    .env-pearl--6 { top: 56%; right: 10%; width: 4px; height: 4px; animation-delay: -2.8s; }
+    .env-pearl--7 { bottom: 24%; left: 11%; width: 4px; height: 4px; animation-delay: -0.9s; }
+    .env-pearl--8 { bottom: 24%; right: 11%; width: 4px; height: 4px; animation-delay: -1.5s; }
+
+    @keyframes envPearlTwinkle {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.95; transform: scale(1.1); }
+    }
+
+    .env-blossom-mini--tl {
+      top: 54%;
+      left: 5%;
+      width: 2.4rem;
+      height: 2.4rem;
+      transform: rotate(12deg);
+      opacity: 0.44;
+    }
+
+    .env-blossom-mini--tr {
+      top: 54%;
+      right: 5%;
+      width: 2.4rem;
+      height: 2.4rem;
+      transform: scaleX(-1) rotate(12deg);
+      opacity: 0.44;
+    }
+
+    .env-float-heart--5 { top: 42%; left: 4%; font-size: 1.2rem; animation-delay: -3.5s; }
+    .env-float-heart--6 { top: 40%; right: 5%; font-size: 1.05rem; animation-delay: -5s; }
+    .env-float-heart--7 { bottom: 12%; left: 30%; font-size: 0.9rem; animation-delay: -2.5s; }
+    .env-float-heart--8 { bottom: 12%; right: 30%; font-size: 0.9rem; animation-delay: -4.5s; }
+
+    .env-inscription {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* верхний клапан — треугольник, текст не выходит за края */
+    .env-inscription-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(var(--env-h) * 118 / 220);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-top: calc(var(--env-h) * 0.045);
+      padding-left: 14%;
+      padding-right: 14%;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: opacity 0.5s ease;
+    }
+
+    .env-inscription-heart {
+      display: block;
+      font-size: clamp(7px, calc(var(--env-h) * 0.034), 10px);
+      line-height: 1;
+      color: #ad5f6d;
+      opacity: 0.75;
+      margin-bottom: 0.15em;
+      flex-shrink: 0;
+    }
+
+    .env-inscription-pretitle {
+      margin: 0 0 0.25em;
+      width: 100%;
+      max-width: 100%;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(6px, calc(var(--env-h) * 0.036), 10px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: rgba(143, 68, 80, 0.88);
+      flex-shrink: 0;
+    }
+
+    .env-inscription-title {
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(14px, calc(var(--env-h) * 0.088), 26px);
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      line-height: 1.06;
+      text-transform: uppercase;
+      color: #a6505f;
+      text-shadow: none;
+      flex-shrink: 0;
+    }
+
+    .env-inscription-title span {
+      display: block;
+    }
+
+    .env-inscription-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35em;
+      width: 70%;
+      max-width: 11rem;
+      margin-top: 0.2em;
+      flex-shrink: 0;
+    }
+
+    .env-inscription-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(196, 136, 150, 0.6), transparent);
+    }
+
+    .env-inscription-divider-ornament {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(6px, calc(var(--env-h) * 0.028), 9px);
+      font-style: italic;
+      color: rgba(173, 95, 109, 0.7);
+      line-height: 1;
+    }
+
+    /* нижняя часть конверта */
+    .env-inscription-lower-wrap {
+      position: absolute;
+      left: 50%;
+      top: 72%;
+      transform: translateX(-50%);
+      z-index: 4;
+      text-align: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .env-inscription-divider--lower {
+      width: 5.5rem;
+      margin: 0 auto 0.35em;
+    }
+
+    .env-inscription-lower {
+      margin: 0;
+      font-family: 'Great Vibes', 'Parisienne', 'Marck Script', cursive;
+      font-size: clamp(20px, calc(var(--env-h) * 0.108), 34px);
+      font-weight: 400;
+      line-height: 1;
+      color: #b66b78;
+      white-space: nowrap;
+    }
+
+    .envelope-wrapper.open .env-inscription-flap,
+    .envelope-wrapper.open .env-inscription-lower-wrap {
+      opacity: 0;
+    }
+
+    .seal-wrap {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* письмо — лист бумаги, спрятан до клика */
+    .letter {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%) translateY(168px);
+      width: calc(var(--env-w) * 0.9);
+      height: calc(var(--env-w) * 0.78);
+      background: linear-gradient(168deg, #fffdf9 0%, #fff9f3 55%, #fff5ec 100%);
+      border: 1px solid rgba(218, 188, 178, 0.45);
+      border-radius: 1px;
+      box-shadow: none;
+      z-index: 1;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        transform 1.2s cubic-bezier(0.34, 1.2, 0.64, 1),
+        opacity 0.5s ease 0.35s,
+        visibility 0s linear 1.2s,
+        box-shadow 0.5s ease 0.5s;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .letter-ornaments {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .letter-flourish-corner {
+      position: absolute;
+      width: 5.25rem;
+      height: 5.25rem;
+      color: rgba(168, 95, 112, 0.5);
+    }
+
+    .letter-flourish-corner svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .letter-flourish-corner .corner-frame {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 0.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .letter-flourish-corner .corner-accent {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 0.62;
+      stroke-linecap: round;
+      opacity: 0.55;
+    }
+
+    .letter-flourish-corner--tl { top: 0.55rem; left: 0.55rem; }
+    .letter-flourish-corner--tr { top: 0.55rem; right: 0.55rem; transform: scaleX(-1); }
+    .letter-flourish-corner--bl { bottom: 0.55rem; left: 0.55rem; transform: scaleY(-1); }
+    .letter-flourish-corner--br { bottom: 0.55rem; right: 0.55rem; transform: scale(-1, -1); }
+
+    .letter-flourish-side {
+      position: absolute;
+      color: rgba(158, 88, 108, 0.42);
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .letter-flourish-side svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      overflow: visible;
+    }
+
+    .letter-flourish-side .side-wave {
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .letter-flourish-side .side-wave--main {
+      stroke-width: 0.88;
+    }
+
+    .letter-flourish-side .side-wave--soft {
+      stroke-width: 0.55;
+      opacity: 0.42;
+    }
+
+    .letter-flourish-side .side-curl {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 0.55;
+      stroke-linecap: round;
+      opacity: 0.55;
+    }
+
+    .letter-flourish-side--top {
+      top: 2rem;
+      left: 5.35rem;
+      right: 5.35rem;
+      height: 2.35rem;
+    }
+
+    .letter-flourish-side--bottom {
+      bottom: 2rem;
+      left: 5.35rem;
+      right: 5.35rem;
+      height: 2.35rem;
+      transform: scaleY(-1);
+    }
+
+    .letter-flourish-side--left {
+      left: 2rem;
+      top: 5.35rem;
+      bottom: 5.35rem;
+      width: 2.35rem;
+    }
+
+    .letter-flourish-side--right {
+      right: 2rem;
+      top: 5.35rem;
+      bottom: 5.35rem;
+      width: 2.35rem;
+      transform: scaleX(-1);
+    }
+
+    .letter-motif {
+      position: absolute;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.15rem;
+      line-height: 1;
+      color: rgba(176, 118, 138, 0.35);
+      user-select: none;
+    }
+
+    .letter-motif--top { top: 2.05rem; left: 50%; transform: translateX(-50%); }
+    .letter-motif--bottom { bottom: 2rem; left: 50%; transform: translateX(-50%) scaleY(-1); }
+
+    .letter::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 12% 8%, rgba(255, 220, 228, 0.12) 0%, transparent 42%),
+        radial-gradient(ellipse at 88% 92%, rgba(245, 200, 210, 0.08) 0%, transparent 38%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 4px,
+          rgba(195, 165, 155, 0.012) 4px,
+          rgba(195, 165, 155, 0.012) 5px
+        );
+      pointer-events: none;
+      opacity: 1;
+    }
+
+    .letter-body {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      width: 100%;
+      padding: 5rem 5.1rem 4.85rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.94em;
+      color: #7a3345;
+      text-align: center;
+    }
+
+    .letter-block {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+      width: 100%;
+      max-width: 26rem;
+    }
+
+    .letter-header {
+      flex-shrink: 0;
+      padding-bottom: 0;
+      margin-bottom: 0.65rem;
+    }
+
+    .letter-script-title {
+      margin: 0;
+      padding: 0 0.15rem;
+      font-family: 'Pinyon Script', 'Allura', 'Great Vibes', cursive;
+      font-size: clamp(2.85rem, 8.5vw, 3.75rem);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: #923d50;
+      -webkit-text-fill-color: #923d50;
+    }
+
+    .letter-title-ornament {
+      display: block;
+      width: min(8.5rem, 72%);
+      height: 1.1rem;
+      margin: 0.35rem auto 0;
+      color: rgba(176, 118, 138, 0.45);
+    }
+
+    .letter-title-ornament path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 0.9;
+      stroke-linecap: round;
+    }
+
+    .letter-tagline {
+      margin: 0.2rem 0 0;
+      font-family: 'Marck Script', cursive;
+      font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: rgba(122, 52, 68, 0.75);
+    }
+
+    .letter-tagline-flourish {
+      font-family: 'Great Vibes', cursive;
+      font-size: 0.85em;
+      color: rgba(176, 118, 138, 0.4);
+      padding: 0 0.35rem;
+    }
+
+    .letter-hero {
+      margin: 0.65rem 0 0;
+      font-size: clamp(1.05rem, 2.4vw, 1.18rem);
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: #7a3345;
+    }
+
+    @media (max-height: 720px) {
+      .envelope-wrapper.open .letter {
+        height: calc(100vh - 7.5rem);
+      }
+
+      .envelope-wrapper.open .letter-body {
+        font-size: 0.88em;
+        padding: 4.5rem 4.6rem 4.35rem;
+      }
+
+      .letter-flourish-corner {
+        width: 4.35rem;
+        height: 4.35rem;
+      }
+
+      .letter-flourish-side--top,
+      .letter-flourish-side--bottom {
+        left: 5.1rem;
+        right: 5.1rem;
+        height: 2rem;
+      }
+
+      .letter-flourish-side--left,
+      .letter-flourish-side--right {
+        top: 5.1rem;
+        bottom: 5.1rem;
+        width: 2rem;
+      }
+
+      .letter-script-title {
+        font-size: clamp(2.35rem, 7vw, 3rem);
+      }
+    }
+
+    .letter-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .letter-details {
+      margin-top: 0.25rem;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      list-style: none;
+    }
+
+    .letter-detail {
+      padding: 0.55rem 0;
+      border-bottom: none;
+      position: relative;
+    }
+
+    .letter-detail::after {
+      content: '';
+      display: block;
+      width: min(7rem, 55%);
+      height: 1px;
+      margin: 0.5rem auto 0;
+      background: linear-gradient(90deg, transparent, rgba(195, 150, 165, 0.35), transparent);
+    }
+
+    .letter-detail:last-child::after {
+      display: none;
+    }
+
+    .letter-detail dt {
+      margin: 0 0 0.2rem;
+      font-family: 'Marck Script', cursive;
+      font-size: clamp(1.05rem, 2.6vw, 1.2rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      text-transform: none;
+      color: rgba(138, 53, 72, 0.72);
+    }
+
+    .letter-detail dd {
+      margin: 0;
+      font-size: clamp(0.95rem, 2vw, 1.02rem);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.42;
+      color: #7a3345;
+    }
+
+    .letter-closing {
+      width: 100%;
+      margin-top: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .letter-closing-line {
+      display: block;
+      width: min(9rem, 70%);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(195, 150, 165, 0.45), transparent);
+    }
+
+    .letter-closing-ornament {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.05rem;
+      letter-spacing: 0.35em;
+      color: rgba(176, 118, 138, 0.42);
+      user-select: none;
+    }
+
+    .seal {
+      width: 74px;
+      height: 74px;
+      background: linear-gradient(145deg, #f5b8cc 0%, #eab0c4 55%, #e0a0b8 100%);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 5px 16px rgba(220, 140, 165, 0.45),
+        inset 0 2px 4px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 6px rgba(200, 120, 145, 0.25);
+    }
+
+    .seal-heart {
+      width: 37px;
+      height: 37px;
+      filter: drop-shadow(0 1px 2px rgba(180, 80, 110, 0.35));
+    }
+
+    .envelope-wrapper.open .seal-wrap {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.4);
+    }
+
+    .envelope-wrapper.open .letter {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      bottom: auto;
+      display: flex;
+      flex-direction: column;
+      transform: translate(-50%, -50%);
+      width: min(500px, 94vw);
+      height: min(600px, calc(100vh - 7.5rem));
+      max-height: calc(100vh - 7.5rem);
+      z-index: 20;
+      opacity: 1;
+      visibility: visible;
+      overflow: hidden;
+      transition:
+        transform 1.2s cubic-bezier(0.34, 1.2, 0.64, 1),
+        opacity 0.6s ease 0.25s,
+        visibility 0s linear 0s,
+        box-shadow 0.5s ease 0.5s,
+        width 0.4s ease,
+        height 0.4s ease;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.95) inset,
+        0 28px 60px rgba(160, 100, 120, 0.28),
+        0 8px 20px rgba(180, 130, 150, 0.15);
+    }
+
+    .envelope-wrapper.open .letter-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      height: 100%;
+      padding: 5rem 5.1rem 4.85rem;
+      justify-content: center;
+    }
+
+    .envelope-wrapper.open .letter-block {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .envelope-wrapper.open .letter-header { transition-delay: 0.45s; }
+    .envelope-wrapper.open .letter-content { transition-delay: 0.55s; }
+
+    .letter-lines {
+      display: none;
+    }
+
+    /* мягкое свечение при открытии */
+    .glow {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(248, 207, 216, 0.55) 0%, rgba(244, 184, 198, 0.28) 50%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 9;
+    }
+
+    .glow.active {
+      opacity: 1;
+    }
+
+    /* кнопка закрыть */
+    .close-btn {
+      position: fixed;
+      left: 50%;
+      bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 35;
+      margin: 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(143, 68, 80, 0.75);
+      background: rgba(253, 240, 244, 0.92);
+      border: 1px solid rgba(234, 166, 183, 0.4);
+      padding: 0.5rem 1.35rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, background 0.3s ease;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 18px rgba(160, 100, 120, 0.12);
+    }
+
+    .close-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.75);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="atmosphere" aria-hidden="true">
+    <div class="bg-base"></div>
+    <div class="bg-base-glows"></div>
+    <div class="bg-champagne-patch" aria-hidden="true"></div>
+    <div class="bg-vignette"></div>
+    <div class="bg-glows" id="bgGlows"></div>
+    <div class="bg-flowers" id="bgFlowers"></div>
+    <div class="spring-light-veil" aria-hidden="true"></div>
+    <div class="spring-bloom-layer" id="springBloomLayer" aria-hidden="true"></div>
+    <div class="layer-far" id="layerFar"></div>
+  </div>
+  <div class="envelope-halo" aria-hidden="true"></div>
+  <div class="glow" id="glow"></div>
+
+  <div class="layer-near" id="layerNear" aria-hidden="true"></div>
+
+  <div class="scene">
+    <p class="hint" id="hint">нажми на конверт ♡</p>
+
+    <div class="envelope-wrapper" id="envelope">
+      <div class="envelope">
+        <svg class="env-svg" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="flapShade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f5c0d4"/>
+              <stop offset="100%" stop-color="#eab0c4"/>
+            </linearGradient>
+          </defs>
+          <rect width="340" height="220" rx="3" fill="#fde8f2"/>
+          <polygon points="0,220 340,220 170,118" fill="#fad8e8"/>
+          <line x1="0" y1="220" x2="170" y2="118" stroke="#f0b8cc" stroke-width="0.7" opacity="0.4"/>
+          <line x1="340" y1="220" x2="170" y2="118" stroke="#f0b8cc" stroke-width="0.7" opacity="0.4"/>
+          <g class="flap-group">
+            <polygon points="0,0 340,0 170,118" fill="url(#flapShade)"/>
+            <line x1="15" y1="118" x2="325" y2="118" stroke="#e0a8b8" stroke-width="0.8" opacity="0.25"/>
+          </g>
+        </svg>
+        <div class="envelope-ornaments" aria-hidden="true">
+          <div class="env-glow-soft" aria-hidden="true"></div>
+          <span class="env-float-heart env-float-heart--1">♡</span>
+          <span class="env-float-heart env-float-heart--2">♡</span>
+          <span class="env-float-heart env-float-heart--3">♡</span>
+          <span class="env-float-heart env-float-heart--4">♡</span>
+          <span class="env-sparkle env-sparkle--1" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--2" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--3" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--4" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--5" aria-hidden="true"></span>
+          <span class="env-sparkle env-sparkle--6" aria-hidden="true"></span>
+          <div class="env-blossom-mini env-blossom-mini--bl" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="env-blossom-mini env-blossom-mini--br" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+          <span class="env-deco-motif env-deco-motif--l">❧</span>
+          <span class="env-deco-motif env-deco-motif--r">❧</span>
+          <span class="env-pearl env-pearl--1" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--2" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--3" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--4" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--5" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--6" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--7" aria-hidden="true"></span>
+          <span class="env-pearl env-pearl--8" aria-hidden="true"></span>
+          <span class="env-float-heart env-float-heart--5">♡</span>
+          <span class="env-float-heart env-float-heart--6">♡</span>
+          <span class="env-float-heart env-float-heart--7">♡</span>
+          <span class="env-float-heart env-float-heart--8">♡</span>
+          <div class="env-blossom-mini env-blossom-mini--tl" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="env-blossom-mini env-blossom-mini--tr" aria-hidden="true">
+            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="26" cy="14" rx="9" ry="13" fill="#fde8ec" opacity="0.9"/>
+              <ellipse cx="14" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(-72 14 28)" opacity="0.85"/>
+              <ellipse cx="38" cy="28" rx="9" ry="13" fill="#fad4de" transform="rotate(72 38 28)" opacity="0.85"/>
+              <circle cx="26" cy="28" r="5" fill="#e8a0b0" opacity="0.7"/>
+            </svg>
+          </div>
+        </div>
+        <div class="env-inscription" aria-hidden="true">
+          <div class="env-inscription-flap">
+            <span class="env-inscription-heart">♡</span>
+            <p class="env-inscription-pretitle">приглашение только для тебя</p>
+            <h2 class="env-inscription-title">
+              <span>секретная</span>
+              <span>миссия</span>
+            </h2>
+          </div>
+          <div class="env-inscription-lower-wrap">
+            <div class="env-inscription-divider env-inscription-divider--lower" aria-hidden="true">
+              <span class="env-inscription-divider-line"></span>
+              <span class="env-inscription-divider-ornament">❧</span>
+              <span class="env-inscription-divider-line"></span>
+            </div>
+            <p class="env-inscription-lower">для невесты</p>
+          </div>
+        </div>
+        <div class="letter">
+          <div class="letter-lines" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="letter-ornaments" aria-hidden="true">
+            <div class="letter-flourish-corner letter-flourish-corner--tl">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-corner letter-flourish-corner--tr">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-corner letter-flourish-corner--bl">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-corner letter-flourish-corner--br">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="corner-frame" d="M 14 86 C 14 50, 34 18, 74 12"/>
+                <path class="corner-frame" d="M 14 86 C 54 86, 82 68, 86 34"/>
+                <path class="corner-accent" d="M 74 12 C 90 12, 96 24, 92 38"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--top">
+              <svg viewBox="0 0 300 52" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 0 26 C 25 8, 50 44, 75 26 C 100 8, 125 44, 150 26 C 175 8, 200 44, 225 26 C 250 8, 275 44, 300 26"/>
+                <path class="side-wave side-wave--soft" d="M 0 30 C 25 18, 50 38, 75 30 C 100 18, 125 38, 150 30 C 175 18, 200 38, 225 30 C 250 18, 275 38, 300 30"/>
+                <path class="side-curl" d="M 73 20 C 77 16, 81 24, 77 28 C 73 30, 69 24, 73 20"/>
+                <path class="side-curl" d="M 148 22 C 152 18, 156 26, 152 30 C 148 32, 144 26, 148 22"/>
+                <path class="side-curl" d="M 223 20 C 227 16, 231 24, 227 28 C 223 30, 219 24, 223 20"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--bottom">
+              <svg viewBox="0 0 300 52" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 0 26 C 25 44, 50 8, 75 26 C 100 44, 125 8, 150 26 C 175 44, 200 8, 225 26 C 250 44, 275 8, 300 26"/>
+                <path class="side-wave side-wave--soft" d="M 0 22 C 25 34, 50 14, 75 22 C 100 34, 125 14, 150 22 C 175 34, 200 14, 225 22 C 250 34, 275 14, 300 22"/>
+                <path class="side-curl" d="M 75 30 C 79 34, 83 26, 79 22 C 75 20, 71 26, 75 30"/>
+                <path class="side-curl" d="M 150 32 C 154 36, 158 28, 154 24 C 150 22, 146 28, 150 32"/>
+                <path class="side-curl" d="M 225 30 C 229 34, 233 26, 229 22 C 225 20, 221 26, 225 30"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--left">
+              <svg viewBox="0 0 52 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 26 0 C 8 25, 44 50, 26 75 C 8 100, 44 125, 26 150 C 8 175, 44 200, 26 225 C 8 250, 44 275, 26 300"/>
+                <path class="side-wave side-wave--soft" d="M 30 0 C 18 25, 38 50, 30 75 C 18 100, 38 125, 30 150 C 18 175, 38 200, 30 225 C 18 250, 38 275, 30 300"/>
+                <path class="side-curl" d="M 20 73 C 16 77, 24 81, 28 77 C 30 73, 24 69, 20 73"/>
+                <path class="side-curl" d="M 22 148 C 18 152, 26 156, 30 152 C 32 148, 26 144, 22 148"/>
+                <path class="side-curl" d="M 20 223 C 16 227, 24 231, 28 227 C 30 223, 24 219, 20 223"/>
+              </svg>
+            </div>
+            <div class="letter-flourish-side letter-flourish-side--right">
+              <svg viewBox="0 0 52 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <path class="side-wave side-wave--main" d="M 26 0 C 44 25, 8 50, 26 75 C 44 100, 8 125, 26 150 C 44 175, 8 200, 26 225 C 44 250, 8 275, 26 300"/>
+                <path class="side-wave side-wave--soft" d="M 22 0 C 34 25, 14 50, 22 75 C 34 100, 14 125, 22 150 C 34 175, 14 200, 22 225 C 34 250, 14 275, 22 300"/>
+                <path class="side-curl" d="M 32 75 C 36 79, 28 83, 24 79 C 22 75, 28 71, 32 75"/>
+                <path class="side-curl" d="M 30 150 C 34 154, 26 158, 22 154 C 20 150, 26 146, 30 150"/>
+                <path class="side-curl" d="M 32 225 C 36 229, 28 233, 24 229 C 22 225, 28 221, 32 225"/>
+              </svg>
+            </div>
+            <span class="letter-motif letter-motif--top">❧</span>
+            <span class="letter-motif letter-motif--bottom">❧</span>
+          </div>
+          <div class="letter-body">
+            <header class="letter-block letter-header">
+              <h1 class="letter-script-title">Приглашение</h1>
+              <svg class="letter-title-ornament" viewBox="0 0 140 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 4 12 C 20 6, 45 4, 70 12 C 95 20, 120 18, 136 12"/>
+                <path d="M 70 12 C 68 8, 72 16, 70 12" opacity="0.6"/>
+                <path d="M 25 10 C 30 8, 35 14, 40 11 M 100 13 C 105 16, 110 9, 115 12" opacity="0.55"/>
+              </svg>
+              <p class="letter-tagline"><span class="letter-tagline-flourish">✦</span> на девичник <span class="letter-tagline-flourish">✦</span></p>
+              <p class="letter-hero">Катя, у нас есть план на тебя</p>
+            </header>
+
+            <div class="letter-block letter-content">
+              <dl class="letter-details">
+                <div class="letter-detail">
+                  <dt>Важная деталь</dt>
+                  <dd>30 мая, утро — просыпайся не позже 11:00<br>и узнаешь, что тебя ждёт</dd>
+                </div>
+                <div class="letter-detail">
+                  <dt>Дресс-код</dt>
+                  <dd>надевай то, что душе хочется</dd>
+                </div>
+                <div class="letter-detail">
+                  <dt>Полная конфиденциальность</dt>
+                  <dd>детали дня строго под секретом</dd>
+                </div>
+              </dl>
+
+              <div class="letter-closing" aria-hidden="true">
+                <span class="letter-closing-line"></span>
+                <span class="letter-closing-ornament">♡ · ❧ · ♡</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="seal-wrap">
+          <div class="seal">
+            <svg class="seal-heart" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="sealHeartGrad" cx="32%" cy="28%" r="70%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#ffe0ec"/>
+                  <stop offset="100%" stop-color="#e07898"/>
+                </radialGradient>
+              </defs>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#sealHeartGrad)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="envelope-shadow"></div>
+    </div>
+
+    <button class="close-btn" id="closeBtn">закрыть конверт</button>
+  </div>
+
+  <script>
+    const bgGlows = document.getElementById('bgGlows');
+    const bgFlowers = document.getElementById('bgFlowers');
+    const layerFar = document.getElementById('layerFar');
+    const layerNear = document.getElementById('layerNear');
+    const envelope = document.getElementById('envelope');
+    const hint = document.getElementById('hint');
+    const glow = document.getElementById('glow');
+    const closeBtn = document.getElementById('closeBtn');
+
+    const heartPath = 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z';
+
+    const heartSvg = (fill, stroke, strokeW) => {
+      let attrs = `d="${heartPath}"`;
+      if (stroke) {
+        attrs += ` fill="none" stroke="${stroke}" stroke-width="${strokeW || 0.9}"`;
+      } else {
+        attrs += ` fill="${fill}"`;
+      }
+      return `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path ${attrs}/></svg>`;
+    };
+
+    const heartSvgSmall = (fill) =>
+      `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="${heartPath}" fill="${fill}" transform="scale(0.65) translate(4.2 4.2)"/><path d="${heartPath}" fill="${fill}" transform="scale(0.5) translate(12 10)" opacity="0.6"/></svg>`;
+
+    const petalFills = [
+      'rgba(248, 192, 206, 0.82)',
+      'rgba(244, 175, 192, 0.78)',
+      'rgba(252, 210, 218, 0.8)',
+      'rgba(240, 160, 178, 0.75)',
+      'rgba(253, 200, 212, 0.77)'
+    ];
+
+    const petalSvg = (fill) =>
+      `<svg viewBox="0 0 20 28" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 1.5 C15 10, 16.5 19, 10 26.5 C3.5 19, 5 10, 10 1.5 Z" fill="${fill}"/>
+        <path d="M10 2 C10 12, 10 20, 10 26" fill="none" stroke="rgba(190,100,120,0.15)" stroke-width="0.35" stroke-linecap="round"/>
+      </svg>`;
+
+    function blossomSvg(scale) {
+      const s = scale * 120;
+      const tints = [
+        { petal: '#fde8ec', center: '#eaa6b7', inner: '#f4b8c6' },
+        { petal: '#fff4ea', center: '#e8c4b4', inner: '#f5e0d4' },
+        { petal: '#fff0e8', center: '#e0b8b0', inner: '#f0d4cc' },
+        { petal: '#fce8ee', center: '#e8a8b8', inner: '#f4c8d0' }
+      ];
+      const c = tints[Math.floor(Math.random() * tints.length)];
+      const petals = [0, 72, 144, 216, 288].map((deg) => {
+        const rad = deg * Math.PI / 180;
+        const cx = (60 + Math.cos(rad) * 24).toFixed(1);
+        const cy = (58 + Math.sin(rad) * 24).toFixed(1);
+        return `<ellipse cx="${cx}" cy="${cy}" rx="13" ry="19" fill="${c.petal}" transform="rotate(${deg} ${cx} ${cy})"/>`;
+      }).join('');
+      return `<svg width="${s}" height="${s}" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <g opacity="0.68">${petals}
+        <circle cx="60" cy="58" r="7" fill="${c.center}" opacity="0.72"/>
+        <circle cx="60" cy="58" r="4" fill="${c.inner}" opacity="0.48"/></g>
+      </svg>`;
+    }
+
+    function createGlowBlobs() {
+      const blobs = [
+        { w: 480, h: 480, bg: 'radial-gradient(circle at 35% 35%, #ffe8d0, #ffd0a8 50%, transparent 72%)', blur: 105, op: 0.55, left: '2%', top: '12%', dx: '14px', dy: '-12px' },
+        { w: 400, h: 400, bg: 'radial-gradient(circle at 60% 40%, #fce8ec, #f0b0c8 50%, transparent 70%)', blur: 95, op: 0.48, left: '74%', top: '5%', dx: '-20px', dy: '12px' },
+        { w: 380, h: 380, bg: 'radial-gradient(circle at 40% 60%, #fff4e8, #f0b8c8 55%, transparent 72%)', blur: 88, op: 0.44, left: '3%', top: '70%', dx: '10px', dy: '10px' },
+        { w: 360, h: 360, bg: 'radial-gradient(circle at 55% 45%, #f8c8d8, #e8a0b8 52%, transparent 68%)', blur: 82, op: 0.4, left: '76%', top: '65%', dx: '-16px', dy: '-12px' }
+      ];
+      blobs.forEach((b, i) => {
+        const el = document.createElement('div');
+        el.className = 'glow-blob';
+        el.style.cssText = `
+          width: ${b.w}px; height: ${b.h}px;
+          background: ${b.bg};
+          --blur: ${b.blur}px; --op: ${b.op};
+          --dx: ${b.dx}; --dy: ${b.dy};
+          --dur: ${18 + i * 3}s;
+          --delay: ${-i * 4}s;
+          left: ${b.left}; top: ${b.top};
+        `;
+        bgGlows.appendChild(el);
+      });
+    }
+
+    function pickBorderSideSpot(side) {
+      const r = () => Math.random();
+      if (side === 'top') return { left: `${r() * 100}%`, top: `${-5 + r() * 9}%` };
+      if (side === 'bottom') return { left: `${r() * 100}%`, top: `${93 + r() * 7}%` };
+      if (side === 'left') return { left: `${-5 + r() * 7}%`, top: `${r() * 100}%` };
+      return { left: `${94 + r() * 6}%`, top: `${r() * 100}%` };
+    }
+
+    function pickCornerZoneSpot() {
+      const r = () => Math.random();
+      const zone = Math.floor(Math.random() * 4);
+      if (zone === 0) return { left: `${-5 + r() * 18}%`, top: `${-5 + r() * 16}%` };
+      if (zone === 1) return { left: `${82 + r() * 18}%`, top: `${-5 + r() * 16}%` };
+      if (zone === 2) return { left: `${-5 + r() * 18}%`, top: `${84 + r() * 16}%` };
+      return { left: `${82 + r() * 18}%`, top: `${84 + r() * 16}%` };
+    }
+
+    function pickEdgeFlowerSpot() {
+      const r = () => Math.random();
+      const zone = Math.floor(Math.random() * 20);
+      const spots = [
+        () => ({ left: `${r() * 12}%`, top: `${-5 + r() * 8}%` }),
+        () => ({ left: `${12 + r() * 14}%`, top: `${-5 + r() * 7}%` }),
+        () => ({ left: `${26 + r() * 14}%`, top: `${-5 + r() * 7}%` }),
+        () => ({ left: `${40 + r() * 14}%`, top: `${-5 + r() * 7}%` }),
+        () => ({ left: `${54 + r() * 14}%`, top: `${-5 + r() * 7}%` }),
+        () => ({ left: `${68 + r() * 14}%`, top: `${-5 + r() * 7}%` }),
+        () => ({ left: `${82 + r() * 12}%`, top: `${-5 + r() * 8}%` }),
+        () => ({ left: `${r() * 12}%`, top: `${93 + r() * 8}%` }),
+        () => ({ left: `${12 + r() * 14}%`, top: `${94 + r() * 7}%` }),
+        () => ({ left: `${26 + r() * 14}%`, top: `${94 + r() * 7}%` }),
+        () => ({ left: `${40 + r() * 14}%`, top: `${94 + r() * 7}%` }),
+        () => ({ left: `${54 + r() * 14}%`, top: `${94 + r() * 7}%` }),
+        () => ({ left: `${68 + r() * 14}%`, top: `${94 + r() * 7}%` }),
+        () => ({ left: `${82 + r() * 12}%`, top: `${93 + r() * 8}%` }),
+        () => ({ left: `${-5 + r() * 5}%`, top: `${r() * 96}%` }),
+        () => ({ left: `${-5 + r() * 5}%`, top: `${r() * 96}%` }),
+        () => ({ left: `${94 + r() * 5}%`, top: `${r() * 96}%` }),
+        () => ({ left: `${94 + r() * 5}%`, top: `${r() * 96}%` }),
+        () => pickCornerZoneSpot(),
+        () => pickCornerZoneSpot()
+      ];
+      return spots[zone]();
+    }
+
+    function pickFlowerTier() {
+      const roll = Math.random();
+      if (roll < 0.42) {
+        return { scale: 0.3 + Math.random() * 0.16, op: 0.22 + Math.random() * 0.1, blur: 1.7 + Math.random() * 1 };
+      }
+      if (roll < 0.8) {
+        return { scale: 0.44 + Math.random() * 0.18, op: 0.26 + Math.random() * 0.12, blur: 1.2 + Math.random() * 0.8 };
+      }
+      return { scale: 0.58 + Math.random() * 0.2, op: 0.32 + Math.random() * 0.14, blur: 0.9 + Math.random() * 0.65 };
+    }
+
+    function createBlossomClusters() {
+      const corners = [
+        { left: '-8%', top: '-6%', scale: 1.22, op: 0.5, blur: 1.85 },
+        { right: '-8%', top: '-6%', scale: 1.18, op: 0.48, blur: 1.9 },
+        { left: '-7%', bottom: '-5%', scale: 1.14, op: 0.46, blur: 2 },
+        { right: '-7%', bottom: '-5%', scale: 1.1, op: 0.46, blur: 2 }
+      ];
+
+      const borderCounts = { top: 34, bottom: 34, left: 36, right: 34 };
+      const borderDense = [];
+      ['top', 'bottom', 'left', 'right'].forEach((side) => {
+        for (let i = 0; i < borderCounts[side]; i++) {
+          borderDense.push({ ...pickBorderSideSpot(side), ...pickFlowerTier() });
+        }
+      });
+
+      const cornerFlowers = [];
+      for (let i = 0; i < 20; i++) {
+        cornerFlowers.push({ ...pickCornerZoneSpot(), ...pickFlowerTier() });
+      }
+
+      const edgeAccents = [];
+      const addSideAccents = (side, n) => {
+        const r = () => Math.random();
+        for (let i = 0; i < n; i++) {
+          const t = pickFlowerTier();
+          if (side === 'top') edgeAccents.push({ left: `${4 + r() * 90}%`, top: `${r() * 3}%`, ...t });
+          else if (side === 'bottom') edgeAccents.push({ left: `${4 + r() * 90}%`, bottom: `${r() * 3}%`, ...t });
+          else if (side === 'left') edgeAccents.push({ left: `${r() * 3}%`, top: `${4 + r() * 90}%`, ...t });
+          else edgeAccents.push({ right: `${r() * 3}%`, top: `${4 + r() * 90}%`, ...t });
+        }
+      };
+      addSideAccents('top', 14);
+      addSideAccents('bottom', 14);
+      addSideAccents('left', 14);
+      addSideAccents('right', 14);
+
+      const edgeFlowers = [];
+      for (let i = 0; i < 44; i++) {
+        edgeFlowers.push({ ...pickEdgeFlowerSpot(), ...pickFlowerTier() });
+      }
+
+      [...corners, ...borderDense, ...cornerFlowers, ...edgeAccents, ...edgeFlowers].forEach((c, i) => {
+        const el = document.createElement('div');
+        el.className = 'blossom-cluster';
+        el.innerHTML = blossomSvg(c.scale);
+        const pos = [];
+        if (c.left) {
+          pos.push(`left:${c.left}`);
+          el.dataset.side = 'left';
+        }
+        if (c.right) {
+          pos.push(`right:${c.right}`);
+          el.dataset.side = 'right';
+        }
+        if (c.top) {
+          pos.push(`top:${c.top}`);
+          if (!el.dataset.side) el.dataset.side = 'top';
+        }
+        if (c.bottom) {
+          pos.push(`bottom:${c.bottom}`);
+          if (!el.dataset.side) el.dataset.side = 'bottom';
+        }
+        el.style.cssText = `
+          ${pos.join(';')};
+          --op: ${c.op};
+          --blur: ${c.blur}px;
+          --delay: ${-(i * 1.8 + Math.random() * 3)}s;
+        `;
+        bgFlowers.appendChild(el);
+      });
+    }
+
+    function createBokeh(container, count) {
+      const colors = ['rgba(255,255,255,0.9)', 'rgba(255,248,242,0.85)', 'rgba(253,230,233,0.8)', 'rgba(248,207,216,0.75)'];
+      for (let i = 0; i < count; i++) {
+        const size = 4 + Math.random() * 32;
+        const el = document.createElement('div');
+        el.className = 'bokeh';
+        const opMin = 0.12 + Math.random() * 0.15;
+        const opMax = opMin + 0.15 + Math.random() * 0.18;
+        el.style.cssText = `
+          width: ${size}px; height: ${size}px;
+          --bokeh-color: ${colors[i % colors.length]};
+          --blur: ${2 + Math.random() * 10}px;
+          --op-min: ${opMin}; --op-max: ${Math.min(opMax, 0.45)};
+          --dur: ${5 + Math.random() * 8}s;
+          --delay: ${Math.random() * -12}s;
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function createSparkles(container, count) {
+      const colors = ['#fff', '#fff8f5', '#fde6e9', '#f8d0d8', '#fff0ea'];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'sparkle-dot';
+        const size = 1 + Math.random() * 2;
+        el.style.cssText = `
+          --size: ${size}px;
+          --sparkle-color: ${colors[i % colors.length]};
+          --dur: ${2 + Math.random() * 4}s;
+          --delay: ${Math.random() * -8}s;
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function pickGiantHeartSpawn() {
+      const edge = Math.random();
+      if (edge < 0.28) {
+        return { left: `${-10 + Math.random() * 24}%`, top: `${12 + Math.random() * 78}%` };
+      }
+      if (edge < 0.56) {
+        return { left: `${76 + Math.random() * 24}%`, top: `${12 + Math.random() * 78}%` };
+      }
+      if (edge < 0.78) {
+        return { left: `${2 + Math.random() * 96}%`, top: `${76 + Math.random() * 20}%` };
+      }
+      return { left: `${2 + Math.random() * 96}%`, top: `${4 + Math.random() * 24}%` };
+    }
+
+    function pickHeartSpawn(near) {
+      if (near) {
+        return {
+          left: `${3 + Math.random() * 94}%`,
+          top: `${55 + Math.random() * 45}%`
+        };
+      }
+      let left, top;
+      let tries = 0;
+      do {
+        left = 3 + Math.random() * 94;
+        top = 78 + Math.random() * 22;
+        tries++;
+      } while (tries < 20 && left > 30 && left < 70 && top > 32 && top < 72);
+      return { left: `${left}%`, top: `${top}%` };
+    }
+
+    function pickHeartTier() {
+      const roll = Math.random();
+      if (roll < 0.24) {
+        return { tier: 'whisper', op: 0.04 + Math.random() * 0.06, blurChance: 0.62, visible: false };
+      }
+      if (roll < 0.46) {
+        return { tier: 'faint', op: 0.07 + Math.random() * 0.09, blurChance: 0.58, visible: false };
+      }
+      if (roll < 0.66) {
+        return { tier: 'mist', op: 0.1 + Math.random() * 0.1, blurChance: 0.52, visible: false };
+      }
+      if (roll < 0.82) {
+        return { tier: 'soft', op: 0.13 + Math.random() * 0.1, blurChance: 0.48, visible: false };
+      }
+      if (roll < 0.92) {
+        return { tier: 'medium', op: 0.17 + Math.random() * 0.1, blurChance: 0.32, visible: false };
+      }
+      if (roll < 0.97) {
+        return { tier: 'clear', op: 0.2 + Math.random() * 0.1, blurChance: 0.2, visible: false };
+      }
+      return { tier: 'bold', op: 0.24 + Math.random() * 0.12, blurChance: 0.14, visible: false };
+    }
+
+    const heartPalettes = {
+      whisper: [
+        { fill: 'rgba(255, 230, 235, 0.06)', type: 'soft' },
+        { fill: 'rgba(248, 207, 216, 0.07)', type: 'soft' },
+        { fill: 'rgba(244, 184, 198, 0.05)', type: 'filled' }
+      ],
+      faint: [
+        { fill: 'rgba(185, 76, 96, 0.08)', type: 'filled' },
+        { fill: 'rgba(234, 166, 183, 0.1)', type: 'filled' },
+        { fill: 'rgba(255, 200, 210, 0.07)', type: 'filled' },
+        { fill: 'rgba(244, 184, 198, 0.06)', type: 'double' }
+      ],
+      mist: [
+        { fill: 'rgba(220, 110, 130, 0.14)', type: 'filled' },
+        { fill: 'rgba(234, 166, 183, 0.15)', type: 'soft' },
+        { fill: 'rgba(255, 215, 222, 0.12)', type: 'filled' },
+        { fill: 'rgba(248, 207, 216, 0.16)', type: 'filled' }
+      ],
+      soft: [
+        { fill: 'rgba(220, 110, 130, 0.18)', type: 'filled' },
+        { fill: 'rgba(234, 166, 183, 0.2)', type: 'filled' },
+        { fill: 'rgba(244, 184, 198, 0.19)', type: 'filled' },
+        { fill: 'rgba(244, 184, 198, 0.14)', type: 'double' }
+      ],
+      medium: [
+        { fill: 'rgba(210, 100, 125, 0.28)', type: 'filled' },
+        { fill: 'rgba(228, 150, 170, 0.3)', type: 'filled' },
+        { fill: 'rgba(234, 166, 183, 0.32)', type: 'filled' },
+        { fill: 'rgba(244, 184, 198, 0.26)', type: 'double' }
+      ],
+      clear: [
+        { fill: 'rgba(200, 88, 115, 0.36)', type: 'filled' },
+        { fill: 'rgba(228, 150, 170, 0.38)', type: 'filled' },
+        { fill: 'rgba(234, 166, 183, 0.4)', type: 'filled' },
+        { fill: 'rgba(220, 120, 145, 0.34)', type: 'double' }
+      ],
+      bold: [
+        { fill: 'rgba(195, 80, 110, 0.45)', type: 'filled' },
+        { fill: 'rgba(220, 110, 130, 0.48)', type: 'filled' },
+        { fill: 'rgba(234, 166, 183, 0.5)', type: 'filled' },
+        { fill: 'rgba(210, 95, 120, 0.42)', type: 'double' }
+      ]
+    };
+
+    function createHearts(container, count, near) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        const roll = Math.random();
+        let size;
+        if (roll < 0.68) size = 16 + Math.random() * 22;
+        else if (roll < 0.9) size = 34 + Math.random() * 18;
+        else size = 48 + Math.random() * 14;
+
+        const tier = pickHeartTier();
+        const palette = heartPalettes[tier.tier];
+        const p = palette[Math.floor(Math.random() * palette.length)];
+        let cls = `heart-shape ${tier.tier}`;
+        if (tier.tier === 'bold') cls += ' visible-bold';
+        else if (tier.tier === 'clear') cls += ' visible';
+        else if (tier.tier === 'medium') cls += ' visible-medium';
+        if (Math.random() < tier.blurChance) cls += ' blurred';
+        else if (p.type === 'soft' || tier.tier === 'whisper' || tier.tier === 'faint' || tier.tier === 'mist') cls += ' soft-blur';
+
+        if (p.type === 'double') {
+          el.innerHTML = heartSvgSmall(p.fill);
+        } else {
+          el.innerHTML = heartSvg(p.fill);
+        }
+
+        const dur = 100 + Math.random() * 70;
+        const pos = pickHeartSpawn(near);
+        const op = Math.min(0.26, tier.op * (0.7 + Math.random() * 0.25));
+        el.className = cls;
+        el.style.cssText = `
+          --size: ${size}px;
+          --op: ${op};
+          --dur: ${dur}s;
+          --delay: ${Math.random() * -dur}s;
+          --rot: ${-14 + Math.random() * 28}deg;
+          --rot-end: ${5 + Math.random() * 12}deg;
+          --drift: ${-22 + Math.random() * 44}px;
+          --scale-start: ${0.84 + Math.random() * 0.1};
+          --scale-end: ${0.9 + Math.random() * 0.08};
+          left: ${pos.left};
+          top: ${pos.top};
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function createLargeSoftHearts(container, count) {
+      const fills = [
+        'rgba(255, 230, 235, 0.09)',
+        'rgba(248, 207, 216, 0.1)',
+        'rgba(244, 184, 198, 0.08)',
+        'rgba(255, 220, 228, 0.07)',
+        'rgba(252, 195, 210, 0.085)'
+      ];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        const size = 92 + Math.random() * 72;
+        el.className = 'heart-shape heart-giant whisper soft-blur';
+        el.innerHTML = heartSvg(fills[i % fills.length]);
+        const dur = 130 + Math.random() * 90;
+        const pos = pickGiantHeartSpawn();
+        el.style.cssText = `
+          --size: ${size}px;
+          --op: ${0.07 + Math.random() * 0.09};
+          --dur: ${dur}s;
+          --delay: ${Math.random() * -dur}s;
+          --rot: ${-10 + Math.random() * 20}deg;
+          --rot-end: ${4 + Math.random() * 8}deg;
+          --drift: ${-16 + Math.random() * 32}px;
+          --scale-start: ${0.88 + Math.random() * 0.08};
+          --scale-end: ${0.92 + Math.random() * 0.06};
+          left: ${pos.left};
+          top: ${pos.top};
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function createMegaSoftHearts(container, count) {
+      const fills = [
+        'rgba(255, 228, 236, 0.065)',
+        'rgba(245, 200, 212, 0.07)',
+        'rgba(252, 210, 222, 0.06)'
+      ];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        const size = 148 + Math.random() * 95;
+        el.className = 'heart-shape heart-giant-xl whisper soft-blur';
+        el.innerHTML = heartSvg(fills[i % fills.length]);
+        const dur = 150 + Math.random() * 100;
+        const pos = pickGiantHeartSpawn();
+        el.style.cssText = `
+          --size: ${size}px;
+          --op: ${0.06 + Math.random() * 0.08};
+          --dur: ${dur}s;
+          --delay: ${Math.random() * -dur}s;
+          --rot: ${-8 + Math.random() * 16}deg;
+          --rot-end: ${3 + Math.random() * 6}deg;
+          --drift: ${-12 + Math.random() * 24}px;
+          --scale-start: ${0.9 + Math.random() * 0.06};
+          --scale-end: ${0.94 + Math.random() * 0.05};
+          left: ${pos.left};
+          top: ${pos.top};
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    const giantBackdropSpots = [
+      { left: '6%', top: '32%' },
+      { left: '78%', top: '38%' },
+      { left: '12%', top: '68%' }
+    ];
+
+    function createUltraSoftHearts(container, count) {
+      const fills = [
+        'rgba(255, 225, 235, 0.08)',
+        'rgba(248, 195, 210, 0.085)',
+        'rgba(252, 210, 222, 0.075)',
+        'rgba(255, 218, 228, 0.07)'
+      ];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        const size = 220 + Math.random() * 100;
+        el.className = 'heart-shape heart-giant-ultra whisper soft-blur';
+        el.innerHTML = heartSvg(fills[i % fills.length]);
+        const dur = 165 + Math.random() * 110;
+        const pos = giantBackdropSpots[i] || pickGiantHeartSpawn();
+        el.style.cssText = `
+          --size: ${size}px;
+          --op: ${0.055 + Math.random() * 0.075};
+          --dur: ${dur}s;
+          --delay: ${Math.random() * -dur}s;
+          --rot: ${-6 + Math.random() * 12}deg;
+          --rot-end: ${2 + Math.random() * 5}deg;
+          --drift: ${-10 + Math.random() * 20}px;
+          --scale-start: ${0.92 + Math.random() * 0.05};
+          --scale-end: ${0.95 + Math.random() * 0.04};
+          left: ${pos.left};
+          top: ${pos.top};
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function createPetals(container, count, near) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        const w = 14 + Math.random() * 18;
+        const h = w * 1.45;
+        const blurred = Math.random() < 0.2;
+        el.className = 'petal-drift' + (blurred ? ' blurred' : '');
+        el.innerHTML = petalSvg(petalFills[i % petalFills.length]);
+        const dur = 32 + Math.random() * 28;
+        el.style.cssText = `
+          --w: ${w}px;
+          --h: ${h}px;
+          width: ${w}px;
+          height: ${h}px;
+          --op: ${0.2 + Math.random() * 0.35};
+          --dur: ${dur}s;
+          --delay: ${Math.random() * -dur}s;
+          --rot: ${-30 + Math.random() * 60}deg;
+          --spin: ${20 + Math.random() * 25}deg;
+          --dx: ${-40 + Math.random() * 80}px;
+          --fall: 108vh;
+          left: ${near ? pickEdgeFlowerSpot().left : `${Math.random() * 100}%`};
+          top: ${near ? pickEdgeFlowerSpot().top : `${-5 + Math.random() * 8}%`};
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function buildAtmosphere() {
+      createGlowBlobs();
+      createBlossomClusters();
+      createBokeh(layerFar, 22);
+      createSparkles(layerFar, 38);
+      createHearts(layerFar, 530, false);
+      createLargeSoftHearts(layerFar, 70);
+      createUltraSoftHearts(layerFar, 3);
+      createSparkles(layerNear, 22);
+      createHearts(layerNear, 270, true);
+      createLargeSoftHearts(layerNear, 35);
+    }
+
+    const springBloomLayer = document.getElementById('springBloomLayer');
+
+    const springHeartFills = [
+      'rgba(244, 200, 210, 0.28)',
+      'rgba(234, 166, 183, 0.26)',
+      'rgba(248, 207, 216, 0.3)',
+      'rgba(255, 225, 235, 0.32)',
+      'rgba(220, 120, 145, 0.24)'
+    ];
+
+    let springFillTimer = null;
+
+    function addSpringHeart() {
+      const el = document.createElement('div');
+      const size = 38 + Math.random() * 44;
+      el.className = 'spring-item spring-item--heart';
+      el.innerHTML = heartSvg(springHeartFills[Math.floor(Math.random() * springHeartFills.length)]);
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+      el.style.left = `${Math.random() * 100}%`;
+      el.style.top = `${Math.random() * 100}%`;
+      el.style.setProperty('--op', `${0.18 + Math.random() * 0.28}`);
+      el.style.animationDelay = `${Math.random() * 1.2}s`;
+      el.style.animationDuration = `${2.8 + Math.random() * 2}s`;
+      springBloomLayer.appendChild(el);
+    }
+
+    function addSpringBloom() {
+      const el = document.createElement('div');
+      el.className = 'spring-item spring-item--bloom';
+      el.innerHTML = blossomSvg(0.7 + Math.random() * 1.1);
+      el.style.left = `${Math.random() * 100}%`;
+      el.style.top = `${Math.random() * 100}%`;
+      el.style.setProperty('--op', `${0.2 + Math.random() * 0.35}`);
+      el.style.setProperty('--blur', `${0.3 + Math.random() * 1.2}px`);
+      el.style.animationDelay = `${Math.random() * 1.4}s`;
+      el.style.animationDuration = `${2.6 + Math.random() * 2}s`;
+      springBloomLayer.appendChild(el);
+    }
+
+    function addSpringShimmer() {
+      const el = document.createElement('div');
+      const sz = 3 + Math.random() * 12;
+      el.className = 'spring-shimmer';
+      el.style.width = `${sz}px`;
+      el.style.height = `${sz}px`;
+      el.style.left = `${Math.random() * 100}%`;
+      el.style.top = `${Math.random() * 100}%`;
+      el.style.setProperty('--delay', `${Math.random() * -8}s`);
+      springBloomLayer.appendChild(el);
+    }
+
+    function addSpringPetal() {
+      const el = document.createElement('div');
+      const w = 14 + Math.random() * 16;
+      const h = w * 1.45;
+      el.className = 'spring-petal' + (Math.random() < 0.15 ? ' blurred' : '');
+      el.innerHTML = petalSvg(petalFills[Math.floor(Math.random() * petalFills.length)]);
+      const dur = 42 + Math.random() * 28;
+      el.style.cssText = `
+        --w: ${w}px;
+        width: ${w}px;
+        height: ${h}px;
+        --op: ${0.16 + Math.random() * 0.26};
+        --dur: ${dur}s;
+        --delay: ${Math.random() * -dur}s;
+        --rot: ${-25 + Math.random() * 50}deg;
+        --spin: ${18 + Math.random() * 22}deg;
+        --dx: ${-35 + Math.random() * 70}px;
+        --fall: 108vh;
+        left: ${Math.random() * 100}%;
+        top: ${-2 + Math.random() * 4}%;
+      `;
+      springBloomLayer.appendChild(el);
+    }
+
+    function addExtraSparkles() {
+      const colors = ['rgba(255,255,255,0.95)', 'rgba(255,248,242,0.9)', 'rgba(253,230,233,0.85)'];
+      for (let i = 0; i < 75; i++) {
+        const size = 2 + Math.random() * 6;
+        const el = document.createElement('div');
+        el.className = 'sparkle-dot spring-extra';
+        el.style.cssText = `
+          width: ${size}px; height: ${size}px;
+          --sparkle-color: ${colors[i % colors.length]};
+          --dur: ${3 + Math.random() * 5}s;
+          --delay: ${Math.random() * -10}s;
+          left: ${Math.random() * 100}%;
+          top: ${Math.random() * 100}%;
+        `;
+        layerFar.appendChild(el);
+      }
+    }
+
+    function spawnSpringBloom() {
+      springBloomLayer.innerHTML = '';
+      for (let i = 0; i < 72; i++) addSpringBloom();
+      for (let i = 0; i < 58; i++) addSpringHeart();
+      for (let i = 0; i < 85; i++) addSpringShimmer();
+      for (let i = 0; i < 20; i++) addSpringPetal();
+    }
+
+    function startSpringGentleFill() {
+      stopSpringGentleFill();
+      let n = 0;
+      springFillTimer = setInterval(() => {
+        if (!document.body.classList.contains('letter-reading') || n >= 24) {
+          stopSpringGentleFill();
+          return;
+        }
+        addSpringHeart();
+        if (n % 2 === 0) addSpringBloom();
+        if (n % 5 === 0) addSpringShimmer();
+        n += 1;
+      }, 1100);
+    }
+
+    function stopSpringGentleFill() {
+      if (springFillTimer) {
+        clearInterval(springFillTimer);
+        springFillTimer = null;
+      }
+    }
+
+    function clearSpringBloom() {
+      stopSpringGentleFill();
+      springBloomLayer.innerHTML = '';
+      document.querySelectorAll('.sparkle-dot.spring-extra').forEach((el) => el.remove());
+    }
+
+    function setSpringBloom(on) {
+      document.body.classList.toggle('letter-reading', on);
+      if (on) {
+        setTimeout(() => {
+          spawnSpringBloom();
+          addExtraSparkles();
+          startSpringGentleFill();
+        }, 750);
+      } else {
+        clearSpringBloom();
+      }
+    }
+
+    let isOpen = false;
+
+    envelope.addEventListener('click', () => {
+      if (isOpen) return;
+      isOpen = true;
+      envelope.classList.add('open');
+      hint.classList.add('hidden');
+      glow.classList.add('active');
+      closeBtn.classList.add('visible');
+      setSpringBloom(true);
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isOpen = false;
+      setSpringBloom(false);
+      envelope.classList.remove('open');
+      hint.classList.remove('hidden');
+      glow.classList.remove('active');
+      closeBtn.classList.remove('visible');
+    });
+
+    buildAtmosphere();
+  </script>
+</body>
+</html>
