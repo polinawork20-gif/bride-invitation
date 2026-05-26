@@ -177,7 +177,7 @@ const bgGlows = document.getElementById('bgGlows');
         { right: '-7%', bottom: '-5%', scale: 1.1, op: 0.46, blur: 2 }
       ];
 
-      const borderCounts = { top: 34, bottom: 34, left: 36, right: 34 };
+      const borderCounts = { top: 10, bottom: 10, left: 10, right: 10 };
       const borderDense = [];
       ['top', 'bottom', 'left', 'right'].forEach((side) => {
         for (let i = 0; i < borderCounts[side]; i++) {
@@ -186,7 +186,7 @@ const bgGlows = document.getElementById('bgGlows');
       });
 
       const cornerFlowers = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 8; i++) {
         cornerFlowers.push({ ...pickCornerZoneSpot(), ...pickFlowerTier() });
       }
 
@@ -201,13 +201,13 @@ const bgGlows = document.getElementById('bgGlows');
           else edgeAccents.push({ right: `${r() * 3}%`, top: `${4 + r() * 90}%`, ...t });
         }
       };
-      addSideAccents('top', 14);
-      addSideAccents('bottom', 14);
-      addSideAccents('left', 14);
-      addSideAccents('right', 14);
+      addSideAccents('top', 5);
+      addSideAccents('bottom', 5);
+      addSideAccents('left', 5);
+      addSideAccents('right', 5);
 
       const edgeFlowers = [];
-      for (let i = 0; i < 44; i++) {
+      for (let i = 0; i < 16; i++) {
         edgeFlowers.push({ ...pickEdgeFlowerSpot(), ...pickFlowerTier() });
       }
 
@@ -563,24 +563,24 @@ const bgGlows = document.getElementById('bgGlows');
     function buildAtmosphere() {
       createGlowBlobs();
       createBlossomClusters();
-      createBokeh(layerFar, particleCount(22, 50, 6));
-      createSparkles(layerFar, particleCount(38, 70, 8));
-      createHearts(layerFar, particleCount(530, 60, 80), false);
-      createLargeSoftHearts(layerFar, particleCount(70, 55, 2));
-      createUltraSoftHearts(layerFar, prefersReducedMotion() ? 0 : (isMobile() ? 2 : 3));
-      createSparkles(layerNear, particleCount(22, 70, 4));
-      createHearts(layerNear, particleCount(270, 60, 40), true);
-      createLargeSoftHearts(layerNear, particleCount(35, 55, 1));
+      createBokeh(layerFar, particleCount(10, 50, 4));
+      createSparkles(layerFar, particleCount(18, 70, 6));
+      createHearts(layerFar, particleCount(120, 60, 30), false);
+      createLargeSoftHearts(layerFar, particleCount(18, 55, 1));
+      createUltraSoftHearts(layerFar, prefersReducedMotion() ? 0 : (isMobile() ? 1 : 2));
+      createSparkles(layerNear, particleCount(10, 70, 3));
+      createHearts(layerNear, particleCount(60, 60, 15), true);
+      createLargeSoftHearts(layerNear, particleCount(10, 55, 1));
     }
 
     function getSpringCounts() {
       if (prefersReducedMotion()) {
-        return { bloom: 8, heart: 6, shimmer: 6, petal: 2, extraSparkles: 6, fillMax: 3 };
+        return { bloom: 6, heart: 4, shimmer: 4, petal: 2, extraSparkles: 4, fillMax: 2 };
       }
       if (isMobile()) {
-        return { bloom: 22, heart: 18, shimmer: 22, petal: 6, extraSparkles: 18, fillMax: 8 };
+        return { bloom: 10, heart: 8, shimmer: 10, petal: 3, extraSparkles: 8, fillMax: 4 };
       }
-      return { bloom: 72, heart: 58, shimmer: 85, petal: 20, extraSparkles: 75, fillMax: 24 };
+      return { bloom: 28, heart: 22, shimmer: 32, petal: 8, extraSparkles: 25, fillMax: 10 };
     }
 
     const springBloomLayer = document.getElementById('springBloomLayer');
@@ -752,4 +752,8 @@ const bgGlows = document.getElementById('bgGlows');
       closeBtn.classList.remove('visible');
     });
 
-    buildAtmosphere();
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => buildAtmosphere(), { timeout: 2000 });
+    } else {
+      setTimeout(buildAtmosphere, 200);
+    }
