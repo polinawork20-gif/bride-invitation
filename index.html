@@ -429,15 +429,6 @@
       opacity: 0;
       animation: floatUpHeart var(--dur) ease-in-out infinite;
       animation-delay: var(--delay);
-      will-change: transform, opacity;
-    }
-
-    .heart-shape.blurred {
-      filter: blur(2.5px);
-    }
-
-    .heart-shape.soft-blur {
-      filter: blur(4px);
     }
 
     .heart-shape.visible,
@@ -449,47 +440,22 @@
       filter: drop-shadow(0 0 6px rgba(244, 184, 198, 0.25));
     }
 
-    .heart-shape.visible.blurred,
-    .heart-shape.visible-medium.blurred {
-      filter: blur(1.5px);
-    }
-
-    .heart-shape.whisper {
-      filter: blur(5px);
-    }
-
     .heart-giant {
-      filter: blur(8px);
+      filter: blur(3px);
       z-index: 0;
       pointer-events: none;
-    }
-
-    .heart-giant svg {
-      filter: blur(1px);
     }
 
     .heart-giant-xl {
-      filter: blur(11px);
+      filter: blur(4px);
       z-index: 0;
       pointer-events: none;
-    }
-
-    .heart-giant-xl svg {
-      filter: blur(1.5px);
     }
 
     .heart-giant-ultra {
-      filter: blur(16px);
+      filter: blur(7px);
       z-index: 0;
       pointer-events: none;
-    }
-
-    .heart-giant-ultra svg {
-      filter: blur(2px);
-    }
-
-    .heart-shape.mist {
-      filter: blur(3px);
     }
 
     .heart-shape svg {
@@ -1787,7 +1753,7 @@
         { right: '-7%', bottom: '-5%', scale: 1.1, op: 0.46, blur: 2 }
       ];
 
-      const borderCounts = { top: 34, bottom: 34, left: 36, right: 34 };
+      const borderCounts = { top: 10, bottom: 10, left: 10, right: 10 };
       const borderDense = [];
       ['top', 'bottom', 'left', 'right'].forEach((side) => {
         for (let i = 0; i < borderCounts[side]; i++) {
@@ -1796,7 +1762,7 @@
       });
 
       const cornerFlowers = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 8; i++) {
         cornerFlowers.push({ ...pickCornerZoneSpot(), ...pickFlowerTier() });
       }
 
@@ -1811,13 +1777,13 @@
           else edgeAccents.push({ right: `${r() * 3}%`, top: `${4 + r() * 90}%`, ...t });
         }
       };
-      addSideAccents('top', 14);
-      addSideAccents('bottom', 14);
-      addSideAccents('left', 14);
-      addSideAccents('right', 14);
+      addSideAccents('top', 5);
+      addSideAccents('bottom', 5);
+      addSideAccents('left', 5);
+      addSideAccents('right', 5);
 
       const edgeFlowers = [];
-      for (let i = 0; i < 44; i++) {
+      for (let i = 0; i < 16; i++) {
         edgeFlowers.push({ ...pickEdgeFlowerSpot(), ...pickFlowerTier() });
       }
 
@@ -2166,14 +2132,14 @@
     function buildAtmosphere() {
       createGlowBlobs();
       createBlossomClusters();
-      createBokeh(layerFar, 22);
-      createSparkles(layerFar, 38);
-      createHearts(layerFar, 530, false);
-      createLargeSoftHearts(layerFar, 70);
-      createUltraSoftHearts(layerFar, 3);
-      createSparkles(layerNear, 22);
-      createHearts(layerNear, 270, true);
-      createLargeSoftHearts(layerNear, 35);
+      createBokeh(layerFar, 10);
+      createSparkles(layerFar, 18);
+      createHearts(layerFar, 120, false);
+      createLargeSoftHearts(layerFar, 18);
+      createUltraSoftHearts(layerFar, 2);
+      createSparkles(layerNear, 10);
+      createHearts(layerNear, 60, true);
+      createLargeSoftHearts(layerNear, 10);
     }
 
     const springBloomLayer = document.getElementById('springBloomLayer');
@@ -2254,7 +2220,7 @@
 
     function addExtraSparkles() {
       const colors = ['rgba(255,255,255,0.95)', 'rgba(255,248,242,0.9)', 'rgba(253,230,233,0.85)'];
-      for (let i = 0; i < 75; i++) {
+      for (let i = 0; i < 25; i++) {
         const size = 2 + Math.random() * 6;
         const el = document.createElement('div');
         el.className = 'sparkle-dot spring-extra';
@@ -2272,17 +2238,17 @@
 
     function spawnSpringBloom() {
       springBloomLayer.innerHTML = '';
-      for (let i = 0; i < 72; i++) addSpringBloom();
-      for (let i = 0; i < 58; i++) addSpringHeart();
-      for (let i = 0; i < 85; i++) addSpringShimmer();
-      for (let i = 0; i < 20; i++) addSpringPetal();
+      for (let i = 0; i < 28; i++) addSpringBloom();
+      for (let i = 0; i < 22; i++) addSpringHeart();
+      for (let i = 0; i < 32; i++) addSpringShimmer();
+      for (let i = 0; i < 8; i++) addSpringPetal();
     }
 
     function startSpringGentleFill() {
       stopSpringGentleFill();
       let n = 0;
       springFillTimer = setInterval(() => {
-        if (!document.body.classList.contains('letter-reading') || n >= 24) {
+        if (!document.body.classList.contains('letter-reading') || n >= 10) {
           stopSpringGentleFill();
           return;
         }
@@ -2341,7 +2307,11 @@
       closeBtn.classList.remove('visible');
     });
 
-    buildAtmosphere();
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => buildAtmosphere(), { timeout: 2000 });
+    } else {
+      setTimeout(buildAtmosphere, 200);
+    }
   </script>
 </body>
 </html>
